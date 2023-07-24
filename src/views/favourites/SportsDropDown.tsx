@@ -19,7 +19,7 @@ export default function SportDropDown(props: {
       <select
         aria-label="Filter Tasks"
         title="Filter Tasks"
-        className=" focus:outline-none px-4 py-4 mr-5 focus:border-l-green-500 focus:border-l-4  text-lg font-semibold rounded-md"
+        className=" focus:outline-none px-4 py-4 mr-5 focus:border-l-green-500 focus:border-l-4  text-lg font-semibold rounded-md border-2"
         onChange={(e) => setSportFilterCB(e.target.value)}
         defaultValue=""
       >

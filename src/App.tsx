@@ -7,7 +7,7 @@ import { TeamsProvider } from "./contexts/teams/context";
 
 function App() {
   return (
-    <div className={`h-full w-full mx-auto overflow-x-hidden`}>
+    <div className={` w-full mx-auto overflow-hidden`}>
       <TeamsProvider>
         <SportsProvider>
           <ArticlesProvider>

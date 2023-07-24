@@ -10,11 +10,17 @@ export default function FavouriteTeamList() {
   const articleState = useArticlesState();
   const { isLoading, articles } = articleState;
   if (isLoading) return <div>Loading...</div>;
+  console.log("sele", sportFilters);
   return (
     <div>
       {" "}
-      <SelectTeam setTeamFiltersCB={setTeamFilters} />
-      <SportDropDown setSportFilterCB={setSportFilters} />
+      <div className="grid md:grid-cols-2 gap-4 sm:grid-cols-1 mb-7">
+        <SelectTeam
+          setTeamFiltersCB={setTeamFilters}
+          selectedSport={sportFilters}
+        />
+        <SportDropDown setSportFilterCB={setSportFilters} />
+      </div>
       <div>
         {articles
           .filter((article) => {

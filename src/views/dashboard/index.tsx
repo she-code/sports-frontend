@@ -30,11 +30,11 @@ export default function Dashboard() {
         <Matches />
       </div>
 
-      <div className="grid p-4 col-span-2">
-        <div className="  col-start-1 lg:col-end-5 sm:col-end-7 md:col-span-3 ">
+      <div className="grid grid-cols-3 gap-4">
+        <div className=" col-span-2 ">
           <Sports />
         </div>
-        <div className="lg:col-end-7 md-col-start-4">
+        <div className="">
           <Favourite />
         </div>
       </div>
