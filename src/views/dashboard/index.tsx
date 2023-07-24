@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { fetchArticles } from "../../contexts/articles/actions";
 import { useArticlesDispatch } from "../../hooks/articles";
 import Header from "../../components/Header";
+import SportsTab from "../sports/SportsTab";
 
 export default function Dashboard() {
   const articleDispatch = useArticlesDispatch();
@@ -13,7 +14,9 @@ export default function Dashboard() {
     <div className="w-full ">
       <Header />
 
-      <div className="grid p-4 col-span-2"></div>
+      <div className="grid p-4 col-span-2">
+        <SportsTab />
+      </div>
     </div>
   );
 }
