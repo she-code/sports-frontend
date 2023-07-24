@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 // const ArticlesList = React.lazy(() => import("./ArticlesList"));
 
 import ErrorBoundary from "../../components/ErrorBoundary";
