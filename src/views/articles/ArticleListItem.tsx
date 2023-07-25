@@ -1,7 +1,8 @@
-import { Article } from "../../contexts/articles/types";
+import { lazy, Suspense, useState } from "react";
 
-import { useState } from "react";
+import { Article } from "../../contexts/articles/types";
 import ArticlesDetail from "./ArticlesDetail";
+const ImageContainer = lazy(() => import("../../components/ImageContainer"));
 
 export default function ArticleListItem(props: { article: Article }) {
   const { article } = props;
@@ -16,12 +17,9 @@ export default function ArticleListItem(props: { article: Article }) {
   }
   return (
     <div className="bg-white p-2 my-3 sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none w-full">
-      <div
-        style={{
-          background: `url(${article.thumbnail}) no-repeat center center / cover`,
-        }}
-        className="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-100 bg-center bg-cover"
-      ></div>
+      <Suspense fallback={<div className="suspense-loading">Loading...</div>}>
+        <ImageContainer article={article} />
+      </Suspense>
       <div className="flex sm:flex-1 flex-col gap-2 p-1 text-base w-4/5">
         <p>{article.sport.name}</p>
         <h1 className="text-lg sm:text-xl font-semibold  text-gray-600">
