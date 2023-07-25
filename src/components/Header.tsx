@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <>
-      <nav className="flex items-center justify-between  p-4 shadow-xl">
+      <nav className="flex items-center justify-between  p-4 border-transparent bg-white">
         <div className="flex w-2/4"></div>
 
         <div className="flex items-center justify-between  w-2/4">

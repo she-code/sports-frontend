@@ -8,7 +8,6 @@ export default function TeamDropDown() {
   const { isLoading, isError, teams } = teamState;
 
   const [selected, setSelected] = useState(teams[0] || "all");
-  console.log({ t: teamState.teams });
   if (isError) {
     return <div>Error</div>;
   }

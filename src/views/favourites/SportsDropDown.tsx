@@ -23,9 +23,7 @@ export default function SportDropDown(props: {
         onChange={(e) => setSportFilterCB(e.target.value)}
         defaultValue=""
       >
-        <option disabled value="">
-          Sports
-        </option>
+        <option value="">Sports</option>
         {sports.map((sport, sportIdx) => (
           <option key={sportIdx} value={sport.name}>
             {sport.name}

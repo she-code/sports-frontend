@@ -16,12 +16,9 @@ export const matchReducer: Reducer<MatchesState, MatchActions> = (
     case MatchListAvilableAction.FETCH_MATCHES_REQUESTS:
       return { ...state, isLoading: true };
     case MatchListAvilableAction.FETCH_MATCHES_SUCCESS: {
-      console.log("state");
-      console.log(action.payload, "action payload");
       return { ...state, isLoading: false, matches: action.payload };
     }
     case MatchListAvilableAction.FETCH_MATCHES_FAILURE:
-      console.log(action.payload, "action failure");
       return {
         ...state,
         isLoading: false,

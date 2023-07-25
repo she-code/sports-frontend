@@ -12,7 +12,6 @@ export const fetchMatches = async (dispatch: MatchesDispatch) => {
       type: MatchListAvilableAction.FETCH_MATCHES_SUCCESS,
       payload: matches,
     });
-    console.log(matches, "action");
   } catch (error) {
     // Specify 'Error' type for the error
     dispatch({

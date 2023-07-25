@@ -22,7 +22,7 @@ export default function ArticleListItem(props: { article: Article }) {
         }}
         className="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-100 bg-center bg-cover"
       ></div>
-      <div className="flex sm:flex-1 flex-col gap-2 p-1 text-base">
+      <div className="flex sm:flex-1 flex-col gap-2 p-1 text-base w-4/5">
         <p>{article.sport.name}</p>
         <h1 className="text-lg sm:text-xl font-semibold  text-gray-600">
           {article.title}
@@ -37,19 +37,16 @@ export default function ArticleListItem(props: { article: Article }) {
           {new Date(article.date).toDateString().substring(4)}
         </p>
 
-        <div className="flex gap-4 mt-auto">
-          <button
-            type="button"
-            onClick={openModal}
-            className="ml-auto flex items-center gap-1 sm:text-lg border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
-          >
-            Read more
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={openModal}
+          className="md:ml-auto sm:ml-3 items-center w-fit gap-1 sm:text-lg border border-gray-300
+           px-3 py-1 rounded-full hover:bg-green-400 hover:text-white hover:border-none transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
+        >
+          Read more
+        </button>
       </div>
-      {/* <Modal closeCB={() => closeModal} open={isOpen}>
-        <ArticleDetails article={article} />
-      </Modal> */}
+
       <ArticlesDetail
         isOpen={isOpen}
         closeModal={closeModal}

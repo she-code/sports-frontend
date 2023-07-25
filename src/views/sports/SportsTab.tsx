@@ -1,7 +1,9 @@
+import React, { Suspense } from "react";
 import { Tab } from "@headlessui/react";
 
 import { useSportsState } from "../../hooks/sports";
-import ArticlesList from "../articles/ArticlesList";
+import ErrorBoundary from "../../components/ErrorBoundary";
+const ArticlesList = React.lazy(() => import("../articles/ArticlesList"));
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -18,25 +20,21 @@ export default function SportsTab() {
   if (isError) {
     return <span>{errorMessage}</span>;
   }
-  // const sportsArray =
-  //   sports && Object.entries(sports).map(([, value]) => value)[0];
 
-  //   //fetch sports
   return (
     sports && (
       <div className="w-full  px-2 mr-3 sm:px-0">
         <h1 className="text-2xl font-semibold text-gray-600">Trending News</h1>
         <Tab.Group>
-          <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 mt-4">
-            {/* Render the "All" tab */}
+          <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20  mt-4">
             <Tab
               className={({ selected }) =>
                 classNames(
-                  "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700",
-                  "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                  "w-full rounded-lg py-2.5 text-lg font-[500] leading-5 ",
+                  "ring-white ring-opacity-60   focus:outline-none border-transparent",
                   selected
-                    ? "bg-white shadow"
-                    : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                    ? "bg-green-400  text-white"
+                    : "text-slate-700 hover:bg-white/[0.12] hover:text-white"
                 )
               }
             >
@@ -50,11 +48,11 @@ export default function SportsTab() {
                   key={sport.id}
                   className={({ selected }) =>
                     classNames(
-                      "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700",
-                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                      "w-full rounded-lg py-2.5 text-lg font-[500] leading-5 ",
+                      "ring-white ring-opacity-60   focus:outline-none border-transparent",
                       selected
-                        ? "bg-white shadow"
-                        : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                        ? "bg-green-400  text-white"
+                        : "text-slate-700 hover:bg-white/[0.12] hover:text-white"
                     )
                   }
                 >
@@ -73,11 +71,17 @@ export default function SportsTab() {
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
               )}
             >
-              {/* //className="mt-1 flex space-x-1 text-xs font-normal leading-4
-              text-gray-500" */}
               <ul>
                 <li>
-                  <ArticlesList sportID={0} />
+                  <ErrorBoundary>
+                    <Suspense
+                      fallback={
+                        <div className="suspense-loading">Loading...</div>
+                      }
+                    >
+                      <ArticlesList sportID={0} />
+                    </Suspense>
+                  </ErrorBoundary>
                 </li>
               </ul>
             </Tab.Panel>
@@ -94,12 +98,19 @@ export default function SportsTab() {
                 >
                   <ul>
                     <li className="relative rounded-md p-3 hover:bg-gray-100">
-                      <h3 className="text-sm font-medium leading-5">
-                        {sport.name}
-                      </h3>
                       <ul>
                         <li>
-                          <ArticlesList sportID={sport.id} />
+                          <ErrorBoundary>
+                            <Suspense
+                              fallback={
+                                <div className="suspense-loading">
+                                  Loading...
+                                </div>
+                              }
+                            >
+                              <ArticlesList sportID={sport.id} />
+                            </Suspense>
+                          </ErrorBoundary>
                         </li>
                       </ul>
                     </li>

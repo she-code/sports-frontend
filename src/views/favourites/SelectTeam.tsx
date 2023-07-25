@@ -7,9 +7,8 @@ export default function SelectTeam(props: {
   const { setTeamFiltersCB, selectedSport } = props;
   const teamState = useTeamsState();
   const { isLoading, isError, teams } = teamState;
-  console.log({ selectedSport });
   if (isError) {
-    return <div>Error</div>;
+    return <div>Unable to fetch</div>;
   }
   if (isLoading && teams.length === 0) {
     return <div>Loading...</div>;
@@ -20,15 +19,20 @@ export default function SelectTeam(props: {
       <select
         aria-label="Filter Tasks"
         title="Filter Tasks"
-        className="w-full focus:outline-none px-4 py-4 mr-5 focus:border-l-green-500 focus:border-l-4  text-lg font-semibold rounded-md border-2"
+        className=" w-5/6 focus:outline-none px-4 py-4 mr-5 focus:border-l-green-500 focus:border-l-4  text-lg font-semibold rounded-md border-2"
         onChange={(e) => setTeamFiltersCB(e.target.value)}
         defaultValue=""
       >
-        <option disabled value="">
+        <option value="" className="text-slate-500">
           Teams
         </option>
         {teams
-          .filter((team) => team.plays == selectedSport)
+          .filter((team) => {
+            if (selectedSport === "") {
+              return true;
+            }
+            return team.plays == selectedSport;
+          })
           .map((team, teamIdx) => (
             <option key={teamIdx} value={team.name}>
               {team.name}

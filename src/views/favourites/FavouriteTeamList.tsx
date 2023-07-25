@@ -2,6 +2,7 @@ import { useState } from "react";
 import SelectTeam from "./SelectTeam";
 import { useArticlesState } from "../../hooks/articles";
 import SportDropDown from "./SportsDropDown";
+import FavouriteNewsCard from "./FavouriteNewsCard";
 
 export default function FavouriteTeamList() {
   const [teamFilters, setTeamFilters] = useState("");
@@ -10,16 +11,14 @@ export default function FavouriteTeamList() {
   const articleState = useArticlesState();
   const { isLoading, articles } = articleState;
   if (isLoading) return <div>Loading...</div>;
-  console.log("sele", sportFilters);
   return (
-    <div>
-      {" "}
-      <div className="grid md:grid-cols-2 gap-4 sm:grid-cols-1 mb-7">
+    <div className="p-3">
+      <div className="grid grid-cols-2 gap-4  mb-7">
+        <SportDropDown setSportFilterCB={setSportFilters} />
         <SelectTeam
           setTeamFiltersCB={setTeamFilters}
           selectedSport={sportFilters}
         />
-        <SportDropDown setSportFilterCB={setSportFilters} />
       </div>
       <div>
         {articles
@@ -46,16 +45,15 @@ export default function FavouriteTeamList() {
             if (sportFilters !== "") {
               return article.sport.name === sportFilters;
             }
-
-            return false; // Default case if none of the above conditions match
+            // Default case if none of the above conditions match
+            return false;
           })
           .map((article, articleIdx) => (
-            <div
+            <FavouriteNewsCard
+              article={article}
+              articleIdx={articleIdx}
               key={articleIdx}
-              className="border-2 rounded-lg p-3 w-full h-full"
-            >
-              {article.title}
-            </div>
+            />
           ))}
       </div>
     </div>
