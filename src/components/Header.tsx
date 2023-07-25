@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Header() {
+  const [userData] = useState(localStorage.getItem("userData") || "");
   return (
     <>
       <nav className="flex items-center justify-between  p-4 border-transparent bg-white">
@@ -31,12 +33,15 @@ export default function Header() {
               />
             </svg>
             {localStorage.getItem("auth_token") ? (
-              <Link
-                to="/logout"
-                className="uppercase bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded ml-2 text-lg"
-              >
-                Logout
-              </Link>
+              <>
+                {userData && JSON.parse(userData).name}
+                <Link
+                  to="/logout"
+                  className="uppercase bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded ml-2 text-lg"
+                >
+                  Logout
+                </Link>
+              </>
             ) : (
               <Link
                 to="/signin"

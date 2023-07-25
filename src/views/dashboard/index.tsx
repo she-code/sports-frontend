@@ -24,7 +24,7 @@ export default function Dashboard() {
     fetchTeams(teamDispatch);
   }, [articleDispatch, sportDispatch, matchDispatch, teamDispatch]);
   return (
-    <div className="w-full ">
+    <div className="w-full bg-bgRoot">
       <Header />
       <div className="p-4">
         <Matches />
