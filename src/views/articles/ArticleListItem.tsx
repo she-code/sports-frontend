@@ -1,20 +1,24 @@
 import { lazy, Suspense, useState } from "react";
 
 import { Article } from "../../contexts/articles/types";
-import ArticlesDetail from "./ArticlesDetail";
+
+import ArticleDetails from "./ArticleDetails";
 const ImageContainer = lazy(() => import("../../components/ImageContainer"));
 
 export default function ArticleListItem(props: { article: Article }) {
   const { article } = props;
-  const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // Function to open the modal
+  const openModal = () => {
+    setShowModal(true);
+  };
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  // Function to close the modal
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="bg-white p-2 my-3 sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none w-full">
       <Suspense fallback={<div className="suspense-loading">Loading...</div>}>
@@ -43,13 +47,20 @@ export default function ArticleListItem(props: { article: Article }) {
         >
           Read more
         </button>
+        {/* <Link to={`/articles/${article.id}`} onClick={openModal}>
+          Read more
+        </Link> */}
       </div>
+      {showModal && (
+        <ArticleDetails onClose={closeModal} articleId={article?.id} />
+      )}
 
+      {/* 
       <ArticlesDetail
         isOpen={isOpen}
         closeModal={closeModal}
-        article={article}
-      />
+        articleProp={article}
+      /> */}
     </div>
   );
 }

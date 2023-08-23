@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { Article } from "../../contexts/articles/types";
-import ArticlesDetail from "../articles/ArticlesDetail";
+import ArticleDetails from "../articles/ArticleDetails";
 
 export default function FavouriteNewsCard(props: {
   article: Article;
   articleIdx: number;
 }) {
   const { article, articleIdx } = props;
-  const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   function closeModal() {
-    setIsOpen(false);
+    setShowModal(false);
   }
 
   function openModal() {
-    setIsOpen(true);
+    setShowModal(true);
   }
   return (
     <div
@@ -29,12 +29,15 @@ export default function FavouriteNewsCard(props: {
       >
         Read more
       </button>
-      <ArticlesDetail
+      {/* <ArticlesDetail
         isOpen={isOpen}
         key={articleIdx}
         closeModal={closeModal}
-        article={article}
-      />
+        articleProp={article}
+      /> */}
+      {showModal && (
+        <ArticleDetails onClose={closeModal} articleId={article?.id} />
+      )}
     </div>
   );
 }

@@ -28,6 +28,10 @@ const router = createBrowserRouter([
     element: <NotFound />,
   },
   // {
+  //   path: "/articles/:articleId",
+  //   element: <ArticleDetails />,
+  // },
+  // {
   //   path: "/",
   //   element: <AppLayout />,
   //   children: [

@@ -19,3 +19,21 @@ export const fetchArticles = async (dispatch: ArticlesDispatch) => {
     });
   }
 };
+
+export const fetchArticle = async (dispatch: ArticlesDispatch, id: number) => {
+  dispatch({ type: ArticleListAvilableAction.FETCH_ARTICLE_REQUESTS });
+  try {
+    const response = await fetch(`${API_ENDPOINT}/articles/${id}`);
+    const data = await response.json();
+    dispatch({
+      type: ArticleListAvilableAction.FETCH_ARTICLE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    // Specify 'Error' type for the error
+    dispatch({
+      type: ArticleListAvilableAction.FETCH_ARTICLE_FAILURE,
+      payload: "Unable to fetch article",
+    });
+  }
+};

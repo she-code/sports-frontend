@@ -37,6 +37,9 @@ export const matchReducer: Reducer<MatchesState, MatchActions> = (
         isError: true,
         errorMessage: action.payload,
       };
+    case MatchListAvilableAction.CLEAR_MATCH: {
+      return { ...state, match: undefined };
+    }
     default:
       return state;
   }

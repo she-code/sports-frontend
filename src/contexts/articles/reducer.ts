@@ -41,6 +41,8 @@ export const articleReducer: Reducer<ArticlesState, ArticlesActions> = (
         isError: true,
         errorMessage: action.payload,
       };
+    case ArticleListAvilableAction.CLEAR_ARTICLE:
+      return { ...state, article: undefined };
     default:
       return state;
   }

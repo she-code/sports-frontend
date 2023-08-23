@@ -9,8 +9,7 @@ export default function FavouriteTeamList() {
   const [sportFilters, setSportFilters] = useState("");
 
   const articleState = useArticlesState();
-  const { isLoading, articles } = articleState;
-  if (isLoading) return <div>Loading...</div>;
+  const { articles } = articleState;
   return (
     <div className="p-3">
       <div className="grid grid-cols-2 gap-4  mb-7">
