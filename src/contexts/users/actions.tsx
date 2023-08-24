@@ -1,6 +1,7 @@
 import { API_ENDPOINT } from "../../config/constants";
 
 import {
+  Preference,
   User,
   UserListAvilableAction,
   UserLoginPayload,
@@ -92,5 +93,64 @@ export const signinUser = async (
       payload: "Unable to signin user",
     });
     return { ok: false, error };
+  }
+};
+
+export const fetchPreferences = async (dispatch: UsersDispatch) => {
+  try {
+    const auth_token = localStorage.getItem("auth_token");
+    dispatch({ type: UserListAvilableAction.FETCH_PRFRENCES_REQUEST });
+    const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${auth_token}`,
+      },
+    });
+    const preferences: Preference = await response.json();
+    console.log("prefrences", preferences);
+    console.log(`Bearer ${auth_token}`);
+    if (preferences) {
+      dispatch({
+        type: UserListAvilableAction.FETCH_PREFRENCES_SUCCESS,
+        payload: preferences,
+      });
+    }
+    console.log("prefrences", preferences);
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: UserListAvilableAction.FETCH_PREFRENCES_FAILURE,
+      payload: "Unable to fetch preferences",
+    });
+  }
+};
+
+export const updatePreferences = async (
+  dispatch: UsersDispatch,
+  preferences: Preference
+) => {
+  try {
+    const auth_token = localStorage.getItem("auth_token");
+    dispatch({ type: UserListAvilableAction.UPDATE_PRFERENCES_REQUEST });
+    const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${auth_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(preferences),
+    });
+    const data = await response.json();
+    console.log("prefrences", data);
+    dispatch({
+      type: UserListAvilableAction.UPDATE_PRFERENCES_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: UserListAvilableAction.UPDATE_PRFERENCES_FAILURE,
+      payload: "Unable to update preferences",
+    });
   }
 };

@@ -11,6 +11,7 @@ export type UsersState = {
   isError: boolean;
   errorMessage: string;
   user?: User;
+  preferences?: Preference;
 };
 export enum UserListAvilableAction {
   FETCH_USERS_REQUESTS = "FETCH_USERS_REQUESTS",
@@ -25,6 +26,12 @@ export enum UserListAvilableAction {
   SIGNIN_USER_REQUEST = "SIGNIN_USER_REQUEST",
   SIGNIN_USER_SUCCESS = "SIGNIN_USER_SUCCESS",
   SIGNIN_USER_FAILURE = "SIGNIN_USER_FAILURE",
+  FETCH_PRFRENCES_REQUEST = "FETCH_PRFRENCES_REQUEST",
+  FETCH_PREFRENCES_SUCCESS = "FETCH_PREFRENCES_SUCCESS",
+  FETCH_PREFRENCES_FAILURE = "FETCH_PREFRENCES_FAILUR",
+  UPDATE_PRFERENCES_REQUEST = " UPDATE_PRFERENCES_REQUEST",
+  UPDATE_PRFERENCES_SUCCESS = "UPDATE_PRFERENCES_SUCCESS",
+  UPDATE_PRFERENCES_FAILURE = "UPDATE_PRFERENCES_FAILURE",
 }
 
 export type UsersActions =
@@ -44,7 +51,31 @@ export type UsersActions =
   | { type: UserListAvilableAction.CREATE_USER_FAILURE; payload: string }
   | { type: UserListAvilableAction.SIGNIN_USER_REQUEST }
   | { type: UserListAvilableAction.SIGNIN_USER_SUCCESS; payload: User }
-  | { type: UserListAvilableAction.SIGNIN_USER_FAILURE; payload: string };
+  | { type: UserListAvilableAction.SIGNIN_USER_FAILURE; payload: string }
+  | { type: UserListAvilableAction.FETCH_PRFRENCES_REQUEST }
+  | {
+      type: UserListAvilableAction.FETCH_PREFRENCES_SUCCESS;
+      payload: Preference;
+    }
+  | { type: UserListAvilableAction.FETCH_PREFRENCES_FAILURE; payload: string }
+  | {
+      type: UserListAvilableAction.UPDATE_PRFERENCES_REQUEST;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_PRFERENCES_SUCCESS;
+      payload: Preference;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_PRFERENCES_FAILURE;
+      payload: string;
+    };
+
+export type Preference = {
+  prefrences: {
+    sports: [];
+    teams: [];
+  };
+};
 
 export type UserLoginPayload = Omit<User, "id" | "preferences" | "name">;
 

@@ -53,6 +53,30 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
         errorMessage: action.payload,
       };
     }
+
+    case UserListAvilableAction.FETCH_PRFRENCES_REQUEST: {
+      console.log("request");
+      return { ...state, isLoading: true };
+    }
+    // case UserListAvilableAction.FETCH_PREFRENCES_SUCCESS: {
+    //   console.log(action.payload, "payload");
+    //   return { ...state, isLoading: false, preferences: action.payload };
+    // }
+    // case UserListAvilableAction.FETCH_PREFRENCES_FAILURE: {
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     isError: true,
+    //     preferences: {
+    //       prefrences: {
+    //         sports: [],
+    //         teams: [],
+    //       },
+    //     },
+    //     errorMessage: action.payload,
+    //   };
+    // }
+
     default:
       return state;
   }
