@@ -16,6 +16,7 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
     case UserListAvilableAction.FETCH_USER_REQUESTS:
       return { ...state, isLoading: true };
     case UserListAvilableAction.FETCH_USER_SUCCESS: {
+      console.log(action.payload, "payload");
       return { ...state, isLoading: false, sport: action.payload };
     }
     case UserListAvilableAction.FETCH_USER_FAILURE:
@@ -55,27 +56,26 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
     }
 
     case UserListAvilableAction.FETCH_PRFRENCES_REQUEST: {
-      console.log("request");
       return { ...state, isLoading: true };
     }
-    // case UserListAvilableAction.FETCH_PREFRENCES_SUCCESS: {
-    //   console.log(action.payload, "payload");
-    //   return { ...state, isLoading: false, preferences: action.payload };
-    // }
-    // case UserListAvilableAction.FETCH_PREFRENCES_FAILURE: {
-    //   return {
-    //     ...state,
-    //     isLoading: false,
-    //     isError: true,
-    //     preferences: {
-    //       prefrences: {
-    //         sports: [],
-    //         teams: [],
-    //       },
-    //     },
-    //     errorMessage: action.payload,
-    //   };
-    // }
+    case UserListAvilableAction.FETCH_PREFRENCES_SUCCESS: {
+      console.log(action.payload, "payload prefrences");
+      return { ...state, isLoading: false, preferences: action.payload };
+    }
+    case UserListAvilableAction.FETCH_PREFRENCES_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        preferences: {
+          prefrences: {
+            sports: [],
+            teams: [],
+          },
+        },
+        errorMessage: action.payload,
+      };
+    }
 
     default:
       return state;

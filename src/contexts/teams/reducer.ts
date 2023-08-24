@@ -19,6 +19,7 @@ export const teamReducer: Reducer<TeamsState, TeamsActions> = (
       return { ...state, isLoading: false, teams: action.payload };
     }
     case TeamListAvilableAction.FETCH_TEAMS_FAILURE:
+      console.log(action.payload, "payload team");
       return {
         ...state,
         isLoading: false,
