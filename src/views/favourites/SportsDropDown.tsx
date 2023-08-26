@@ -1,10 +1,13 @@
 import { useSportsState } from "../../hooks/sports";
+import { useUsersState } from "../../hooks/users";
 
 export default function SportDropDown(props: {
   setSportFilterCB: (options: string) => void;
 }) {
   const { setSportFilterCB } = props;
   const sportState = useSportsState();
+  const userState = useUsersState();
+  const { preferences } = userState;
   const { isLoading, isError, sports } = sportState;
 
   if (isError) {
@@ -24,11 +27,17 @@ export default function SportDropDown(props: {
         defaultValue=""
       >
         <option value="">Sports</option>
-        {sports.map((sport, sportIdx) => (
-          <option key={sportIdx} value={sport.name}>
-            {sport.name}
-          </option>
-        ))}
+        {sports
+          .filter((sport) =>
+            preferences?.sports
+              ? preferences?.sports?.includes(sport.name.toLowerCase())
+              : true
+          )
+          .map((sport, sportIdx) => (
+            <option key={sportIdx} value={sport.name}>
+              {sport.name}
+            </option>
+          ))}
       </select>
     </div>
   );

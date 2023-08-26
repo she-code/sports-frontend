@@ -9,17 +9,17 @@ import { UsersProvider } from "./contexts/users/context";
 function App() {
   return (
     <div className={` w-full mx-auto overflow-hidden `}>
-      <TeamsProvider>
-        <SportsProvider>
-          <ArticlesProvider>
-            <MatchesProvider>
-              <UsersProvider>
+      <UsersProvider>
+        <TeamsProvider>
+          <SportsProvider>
+            <ArticlesProvider>
+              <MatchesProvider>
                 <RouterProvider router={router} />
-              </UsersProvider>
-            </MatchesProvider>
-          </ArticlesProvider>{" "}
-        </SportsProvider>
-      </TeamsProvider>
+              </MatchesProvider>
+            </ArticlesProvider>{" "}
+          </SportsProvider>
+        </TeamsProvider>
+      </UsersProvider>
     </div>
   );
 }

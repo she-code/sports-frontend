@@ -4,7 +4,7 @@ export type Match = {
   id: number;
   name: string;
   location: string;
-  sportName: number;
+  sportName: string;
   endsAt: Date;
   startsAt: Date;
   score?: {

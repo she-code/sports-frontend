@@ -1,4 +1,5 @@
 import { useTeamsState } from "../../hooks/teams";
+import { useUsersState } from "../../hooks/users";
 
 export default function SelectTeam(props: {
   setTeamFiltersCB: (options: string) => void;
@@ -6,13 +7,16 @@ export default function SelectTeam(props: {
 }) {
   const { setTeamFiltersCB, selectedSport } = props;
   const teamState = useTeamsState();
+  const userState = useUsersState();
   const { isLoading, isError, teams } = teamState;
+  const { preferences } = userState;
   if (isError) {
     return <div>Unable to fetch</div>;
   }
   if (isLoading && teams.length === 0) {
     return <div>Loading...</div>;
   }
+  console.log(preferences?.teams);
   return (
     <div>
       {" "}
@@ -27,12 +31,18 @@ export default function SelectTeam(props: {
           Teams
         </option>
         {teams
+
           .filter((team) => {
             if (selectedSport === "") {
               return true;
             }
             return team.plays == selectedSport;
           })
+          .filter((team) =>
+            preferences?.teams
+              ? preferences?.teams?.includes(team.name.toLowerCase())
+              : true
+          )
           .map((team, teamIdx) => (
             <option key={teamIdx} value={team.name}>
               {team.name}

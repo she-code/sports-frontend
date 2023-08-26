@@ -5,8 +5,7 @@ import { Team } from "../../contexts/teams/types";
 import PrefrenceItem from "./PrefrenceItem";
 import { useSportsState } from "../../hooks/sports";
 import { Sport } from "../../contexts/sports/types";
-import { useUsersDispatch, useUsersState } from "../../hooks/users";
-import { fetchPreferences } from "../../contexts/users/actions";
+import { useUsersState } from "../../hooks/users";
 
 export default function Prefrence(props: {
   isOpen: boolean;
@@ -18,11 +17,26 @@ export default function Prefrence(props: {
   const userState = useUsersState();
   const { teams } = teamState;
   const { sports } = sportState;
-  const { preferences, isLoading } = userState;
-  const usersDispatcch = useUsersDispatch();
+  const { isLoading, preferences } = userState;
+  // const usersDispatcch = useUsersDispatch();
   useEffect(() => {
-    fetchPreferences(usersDispatcch);
-    console.log({ preferences, userState });
+    // fetchPreferences(usersDispatcch);
+    // console.log({ sport: preferences?.sports, userState });
+    // if (preferences) {
+    //   // console.log(Object.values(preferences!)[0], "objs");
+    //   Object.keys(preferences).forEach((key) => {
+    //     console.log(`Key: ${key}`);
+    //     if (key === "sports" || key === "teams") {
+    //       const values = preferences[key as keyof Preference];
+    //       // Iterate through array values
+    //       for (const value of values) {
+    //         console.log(`Value: ${value}`);
+    //       }
+    //     }
+    //   });
+    // }
+    // const preferences = getPreferences();
+    console.log(preferences);
   }, []);
 
   return (
@@ -89,7 +103,7 @@ export default function Prefrence(props: {
 
                         <div className="grid grid-cols-4 gap-4">
                           {teams?.map((team: Team, index: number) => (
-                            <PrefrenceItem team={team} key={index} />
+                            <PrefrenceItem data={team} key={index} />
                           ))}
                         </div>
                       </div>
@@ -103,29 +117,17 @@ export default function Prefrence(props: {
                                 name=""
                                 id=""
                                 className="focus:outline-none mr-3"
+                                checked={preferences?.sports?.some(
+                                  (item) =>
+                                    item.toLowerCase() ===
+                                    sport?.name.toLowerCase()
+                                )}
+                                onChange={() => {}}
                               />
                               <p>{sport?.name}</p>
                             </div>
                           ))}
                         </div>
-                        <>
-                          {preferences?.prefrences?.sports?.map(
-                            (sport: Sport, index: number) => (
-                              <div className="flex " key={index}>
-                                <input
-                                  type="checkbox"
-                                  name=""
-                                  id=""
-                                  className="focus:outline-none mr-3"
-                                />
-                                <p>
-                                  {sport?.name}
-                                  {index}
-                                </p>
-                              </div>
-                            )
-                          )}
-                        </>
                       </div>
                     </>
                   )}

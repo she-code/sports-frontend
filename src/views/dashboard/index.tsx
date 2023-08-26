@@ -11,18 +11,28 @@ import Header from "../../components/Header";
 import Favourite from "../favourites";
 import { useTeamsDispatch } from "../../hooks/teams";
 import { fetchTeams } from "../../contexts/teams/actions";
+import { useUsersDispatch } from "../../hooks/users";
+import { fetchPreferences } from "../../contexts/users/actions";
 
 export default function Dashboard() {
   const articleDispatch = useArticlesDispatch();
   const sportDispatch = useSportsDispatch();
   const matchDispatch = useMatchesDispatch();
   const teamDispatch = useTeamsDispatch();
+  const usersDispatcch = useUsersDispatch();
   useEffect(() => {
     fetchArticles(articleDispatch);
     fetchSports(sportDispatch);
     fetchMatches(matchDispatch);
     fetchTeams(teamDispatch);
-  }, [articleDispatch, sportDispatch, matchDispatch, teamDispatch]);
+    fetchPreferences(usersDispatcch);
+  }, [
+    articleDispatch,
+    sportDispatch,
+    matchDispatch,
+    teamDispatch,
+    usersDispatcch,
+  ]);
   return (
     <div className="w-full bg-bgRoot">
       <Header />

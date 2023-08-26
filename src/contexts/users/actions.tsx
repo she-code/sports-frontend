@@ -106,8 +106,9 @@ export const fetchPreferences = async (dispatch: UsersDispatch) => {
         Authorization: `Bearer ${auth_token}`,
       },
     });
-    const preferences: Preference = await response.json();
-    console.log("prefrences", preferences);
+    const data = await response.json();
+    const preferences = Object.values(data)[0] as Preference;
+    console.log("prefrences", data);
     console.log(`Bearer ${auth_token}`);
     if (preferences) {
       dispatch({

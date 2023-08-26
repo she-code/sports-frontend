@@ -71,10 +71,8 @@ export type UsersActions =
     };
 
 export type Preference = {
-  prefrences: {
-    sports: [];
-    teams: [];
-  };
+  sports: string[];
+  teams: string[];
 };
 
 export type UserLoginPayload = Omit<User, "id" | "preferences" | "name">;

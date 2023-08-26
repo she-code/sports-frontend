@@ -17,7 +17,7 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
       return { ...state, isLoading: true };
     case UserListAvilableAction.FETCH_USER_SUCCESS: {
       console.log(action.payload, "payload");
-      return { ...state, isLoading: false, sport: action.payload };
+      return { ...state, isLoading: false, user: action.payload };
     }
     case UserListAvilableAction.FETCH_USER_FAILURE:
       return {
@@ -68,10 +68,8 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
         isLoading: false,
         isError: true,
         preferences: {
-          prefrences: {
-            sports: [],
-            teams: [],
-          },
+          sports: [],
+          teams: [],
         },
         errorMessage: action.payload,
       };
