@@ -155,3 +155,35 @@ export const updatePreferences = async (
     });
   }
 };
+
+export const updateTeamPreferences = async (
+  dispatch: UsersDispatch,
+  favTeams: Preference
+) => {
+  try {
+    const auth_token = localStorage.getItem("auth_token");
+    // dispatch({ type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_REQUEST });
+    const preferences = JSON.stringify(favTeams);
+    const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${auth_token}`,
+        "Content-Type": "application/json",
+      },
+      body: preferences,
+    });
+    console.log(JSON.stringify(favTeams), "from front");
+    const data = await response.json();
+    console.log("prefrences", data);
+    // dispatch({
+    //   type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_SUCCESS,
+    //   payload: data,
+    // });
+  } catch (error) {
+    console.log(error);
+    // dispatch({
+    //   type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_FAILURE,
+    //   payload: "Unable to update preferences",
+    // });
+  }
+};

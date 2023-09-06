@@ -32,6 +32,10 @@ export enum UserListAvilableAction {
   UPDATE_PRFERENCES_REQUEST = " UPDATE_PRFERENCES_REQUEST",
   UPDATE_PRFERENCES_SUCCESS = "UPDATE_PRFERENCES_SUCCESS",
   UPDATE_PRFERENCES_FAILURE = "UPDATE_PRFERENCES_FAILURE",
+  SET_TEAM_PREFERENCES = " SET_TEAM_PREFERENCES",
+  UPDATE_TEAM_PRFERENCES_REQUEST = " UPDATE_TEAM_PRFERENCES_REQUEST",
+  UPDATE_TEAM_PRFERENCES_SUCCESS = "UPDATE_TEAM_PRFERENCES_SUCCESS",
+  UPDATE_TEAM_PRFERENCES_FAILURE = "UPDATE_TEAM_PRFERENCES_FAILURE",
 }
 
 export type UsersActions =
@@ -68,11 +72,25 @@ export type UsersActions =
   | {
       type: UserListAvilableAction.UPDATE_PRFERENCES_FAILURE;
       payload: string;
+    }
+  | {
+      type: UserListAvilableAction.SET_TEAM_PREFERENCES;
+      payload: string;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_REQUEST;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_SUCCESS;
+      payload: Preference;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_FAILURE;
+      payload: string;
     };
 
 export type Preference = {
-  sports: string[];
-  teams: string[];
+  preferences: { sports: string[]; teams: string[] };
 };
 
 export type UserLoginPayload = Omit<User, "id" | "preferences" | "name">;
