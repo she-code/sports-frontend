@@ -163,7 +163,7 @@ export const updateTeamPreferences = async (
   try {
     const auth_token = localStorage.getItem("auth_token");
     // dispatch({ type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_REQUEST });
-    const preferences = JSON.stringify(favTeams);
+    const preferences = JSON.stringify({ preferences: favTeams });
     const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
       method: "PATCH",
       headers: {

@@ -62,21 +62,22 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
       console.log(action.payload, "payload prefrences");
       return { ...state, isLoading: false, preferences: action.payload };
     }
-    case UserListAvilableAction.FETCH_PREFRENCES_FAILURE: {
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        preferences: {
-          preferences: { sports: [], teams: [] },
-        },
-        errorMessage: action.payload,
-      };
-    }
+    // case UserListAvilableAction.FETCH_PREFRENCES_FAILURE: {
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     isError: true,
+    //     preferences: {
+    //       sports: [],
+    //       teams: [],
+    //     },
+    //     errorMessage: action.payload,
+    //   };
+    // }
     case UserListAvilableAction.SET_TEAM_PREFERENCES: {
       console.log("called", action.payload);
 
-      const existingTeams = state?.preferences?.preferences?.teams || [];
+      const existingTeams = state?.preferences?.teams || [];
       let updatedTeams = [];
       if (existingTeams.includes(action.payload)) {
         updatedTeams = existingTeams.filter((team) => team !== action.payload);
@@ -89,13 +90,9 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
         ...state,
         isLoading: false,
         preferences: {
-          ...state.preferences,
-          preferences: {
-            preferences: {
-              ...state?.preferences?.preferences,
-              teams: updatedTeams,
-            },
-          },
+          ...state?.preferences,
+          teams: updatedTeams,
+          sports: [...(state.preferences?.sports ?? [])],
         },
       };
     }
@@ -124,7 +121,8 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
         ...state,
         isLoading: false,
         preferences: {
-          preferences: { ...state.preferences, ...action.payload },
+          ...state.preferences,
+          ...action.payload,
         },
         isError: false,
       };
@@ -135,10 +133,8 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
         isLoading: false,
         isError: true,
         preferences: {
-          preferences: {
-            sports: [],
-            teams: [],
-          },
+          teams: [] as string[],
+          sports: [] as string[],
         },
         errorMessage: action.payload,
       };

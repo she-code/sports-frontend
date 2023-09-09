@@ -117,7 +117,7 @@ export default function Prefrence(props: {
                               name=""
                               id=""
                               className="focus:outline-none mr-3"
-                              checked={preferences?.preferences.sports?.some(
+                              checked={preferences?.sports?.some(
                                 (item) =>
                                   item.toLowerCase() ===
                                   sport?.name.toLowerCase()

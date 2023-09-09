@@ -29,8 +29,7 @@ export default function PrefrenceItem(props: { data: Team | Sport }) {
       console.log({ updatedPrefrences }, "from prefrences");
     };
     updatePreferences();
-  }, [preferences?.preferences.teams, handleCheckBoxChange]);
-
+  }, [preferences?.teams?.length]);
   // useEffect(() => {
   //   // This code will run whenever 'preferences' changes.
   //   console.log({ preferences });

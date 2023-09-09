@@ -3,7 +3,7 @@ export type User = {
   name: string;
   email: string;
   password?: string;
-  preferences?: object;
+  preferences?: Preference;
 };
 export type UsersState = {
   users: User[];
@@ -90,7 +90,8 @@ export type UsersActions =
     };
 
 export type Preference = {
-  preferences: { sports: string[]; teams: string[] };
+  sports: string[];
+  teams: string[];
 };
 
 export type UserLoginPayload = Omit<User, "id" | "preferences" | "name">;

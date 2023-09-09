@@ -16,7 +16,7 @@ export default function SelectTeam(props: {
   if (isLoading && teams.length === 0) {
     return <div>Loading...</div>;
   }
-  console.log(preferences?.preferences.teams);
+  console.log(preferences?.teams);
   return (
     <div>
       {" "}
@@ -39,10 +39,8 @@ export default function SelectTeam(props: {
             return team.plays == selectedSport;
           })
           .filter((team) =>
-            preferences?.preferences.teams
-              ? preferences?.preferences.teams?.includes(
-                  team.name.toLowerCase()
-                )
+            preferences?.teams
+              ? preferences?.teams?.includes(team.name.toLowerCase())
               : true
           )
           .map((team, teamIdx) => (
