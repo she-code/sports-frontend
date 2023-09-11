@@ -13,7 +13,7 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
   action
 ) => {
   switch (action.type) {
-    case UserListAvilableAction.FETCH_USER_REQUESTS:
+    case UserListAvilableAction.FETCH_USER_REQUEST:
       return { ...state, isLoading: true };
     case UserListAvilableAction.FETCH_USER_SUCCESS: {
       console.log(action.payload, "payload");
@@ -96,26 +96,31 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
         },
       };
     }
+    case UserListAvilableAction.SET_SPORT_PREFERENCES: {
+      console.log("called", action.payload);
 
-    // case UserListAvilableAction.SET_TEAM_PREFERENCES: {
-    //   console.log("called", action.payload);
-    //   return {
-    //     ...state,
-    //     isLoading: false,
-    //     preferences: {
-    //       ...state.preferences,
-    //       teams: [...(state.preferences?.teams ?? []), action.payload],
-    //       sports: [...(state.preferences?.sports ?? [])],
-    //     },
-    //   };
-    // }
+      const existingSports = state?.preferences?.sports || [];
+      let updatedSports = [];
+      if (existingSports.includes(action.payload)) {
+        updatedSports = existingSports.filter(
+          (sport) => sport !== action.payload
+        );
+        console.log({ updatedSports }, "filtered");
+      } else {
+        updatedSports = [...existingSports, action.payload];
+      }
 
-    case UserListAvilableAction.UPDATE_TEAM_PRFERENCES_REQUEST: {
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
+        preferences: {
+          ...state?.preferences,
+          sports: updatedSports,
+          teams: [...(state.preferences?.teams ?? [])],
+        },
       };
     }
+
     case UserListAvilableAction.UPDATE_TEAM_PRFERENCES_SUCCESS: {
       return {
         ...state,
@@ -139,7 +144,35 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
         errorMessage: action.payload,
       };
     }
+    case UserListAvilableAction.UPDATE_PASSWORD_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case UserListAvilableAction.UPDATE_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        user: state?.user
+          ? {
+              ...state.user,
+              password: action.payload as string,
+            }
+          : state?.user,
+        isError: false,
+      };
+    }
 
+    case UserListAvilableAction.UPDATE_PASSWORD_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+
+        errorMessage: action.payload,
+      };
+    }
     default:
       return state;
   }

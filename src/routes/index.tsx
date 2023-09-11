@@ -4,6 +4,7 @@ import Signup from "../views/signup";
 import Logout from "../views/logout";
 import Dashboard from "../views/dashboard";
 import NotFound from "../views/notFound";
+import UpdatePassword from "../views/updatePassword";
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/dashboard" replace /> },
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/updatePassword",
+    element: <UpdatePassword />,
   },
   {
     path: "*",

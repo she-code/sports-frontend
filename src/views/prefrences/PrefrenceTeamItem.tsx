@@ -2,46 +2,42 @@ import { Team } from "../../contexts/teams/types";
 import { Sport } from "../../contexts/sports/types";
 import { useUsersDispatch, useUsersState } from "../../hooks/users";
 import { Preference, UserListAvilableAction } from "../../contexts/users/types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { updateTeamPreferences } from "../../contexts/users/actions";
 
-export default function PrefrenceItem(props: { data: Team | Sport }) {
+export default function PrefrenceTeamItem(props: { data: Team | Sport }) {
   const { data } = props;
-  // const [isChecked, setIsChecked] = useState(false);
   const userDispatch = useUsersDispatch();
   const userState = useUsersState();
   const { preferences } = userState;
 
+  const [handleCheckBoxChangeCalled, setHandleCheckBoxChangeCalled] =
+    useState(false);
+
   const handleCheckBoxChange = (name: string) => {
-    if (name != "")
+    if (name !== "") {
       userDispatch({
         type: UserListAvilableAction.SET_TEAM_PREFERENCES,
         payload: name,
       });
+      setHandleCheckBoxChangeCalled(true);
+    }
   };
-
   useEffect(() => {
     const updatePreferences = async () => {
-      const updatedPrefrences = await updateTeamPreferences(
+      const updatedPreferences = await updateTeamPreferences(
         userDispatch,
         preferences as Preference
       );
-      console.log({ updatedPrefrences }, "from prefrences");
+      console.log({ updatedPreferences }, "from preferences");
     };
-    updatePreferences();
-  }, [preferences?.teams?.length]);
-  // useEffect(() => {
-  //   // This code will run whenever 'preferences' changes.
-  //   console.log({ preferences });
-  //   const handleCheckBoxChange = async () => {
-  //     const updatedPrefrences = await updateTeamPreferences(
-  //       userDispatch,
-  //       preferences as Preference
-  //     );
-  //     console.log({ updatedPrefrences });
-  //   };
-  //   handleCheckBoxChange();
-  // }, [preferences?.teams.length, ]);
+
+    if (handleCheckBoxChangeCalled) {
+      updatePreferences();
+      setHandleCheckBoxChangeCalled(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleCheckBoxChange]);
 
   return (
     <form action="">
@@ -51,12 +47,10 @@ export default function PrefrenceItem(props: { data: Team | Sport }) {
           name={data?.name}
           id={data?.name}
           className="focus:outline-none mr-3"
-          // checked={getPreferences().teams.some(
-          //   (item) => item.toLowerCase() === data?.name.toLowerCase()
-          // )}
+          checked={preferences?.teams.some(
+            (item) => item.toLowerCase() === data?.name.toLowerCase()
+          )}
           onChange={() => {
-            // setName(data?.name);
-            // console.log({ name });
             handleCheckBoxChange(data?.name);
           }}
         />

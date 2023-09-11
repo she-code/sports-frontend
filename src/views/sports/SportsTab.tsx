@@ -15,7 +15,7 @@ export default function SportsTab() {
   const userState = useUsersState();
   const { preferences } = userState;
   const { sports, isLoading, isError, errorMessage } = sportState;
-
+  console.log({ tab: preferences });
   if (sports.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
@@ -49,7 +49,7 @@ export default function SportsTab() {
               sports
                 .filter((sport) =>
                   preferences?.sports
-                    ? preferences?.sports?.includes(sport.name.toLowerCase())
+                    ? preferences?.sports?.includes(sport.name)
                     : true
                 )
                 .map((sport) => (

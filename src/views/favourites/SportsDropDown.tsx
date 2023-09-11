@@ -30,7 +30,7 @@ export default function SportDropDown(props: {
         {sports
           .filter((sport) =>
             preferences?.sports
-              ? preferences?.sports?.includes(sport.name.toLowerCase())
+              ? preferences?.sports?.includes(sport.name)
               : true
           )
           .map((sport, sportIdx) => (

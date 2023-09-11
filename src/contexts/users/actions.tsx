@@ -2,6 +2,7 @@ import { API_ENDPOINT } from "../../config/constants";
 
 import {
   Preference,
+  UpdatePasswordType,
   User,
   UserListAvilableAction,
   UserLoginPayload,
@@ -81,7 +82,7 @@ export const signinUser = async (
       type: UserListAvilableAction.SIGNIN_USER_SUCCESS,
       payload: data,
     });
-    console.log("Sign-in successful");
+    console.log("Sign-in successful", data);
 
     //redirect user
 
@@ -96,6 +97,35 @@ export const signinUser = async (
   }
 };
 
+export const fetchUser = async (dispatch: UsersDispatch) => {
+  try {
+    const auth_token = localStorage.getItem("auth_token");
+    dispatch({ type: UserListAvilableAction.FETCH_USER_REQUEST });
+    const response = await fetch(`${API_ENDPOINT}/user`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${auth_token}`,
+      },
+    });
+    const data = await response.json();
+    const user = Object.values(data)[0] as User;
+    console.log("user data", data);
+    console.log(`Bearer ${auth_token}`);
+    if (user) {
+      dispatch({
+        type: UserListAvilableAction.FETCH_USER_SUCCESS,
+        payload: data,
+      });
+    }
+    console.log("User", user);
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: UserListAvilableAction.FETCH_USER_FAILURE,
+      payload: "Unable to fetch user",
+    });
+  }
+};
 export const fetchPreferences = async (dispatch: UsersDispatch) => {
   try {
     const auth_token = localStorage.getItem("auth_token");
@@ -173,6 +203,71 @@ export const updateTeamPreferences = async (
       body: preferences,
     });
     console.log(JSON.stringify(favTeams), "from front");
+    const data = await response.json();
+    console.log("prefrences", data);
+    // dispatch({
+    //   type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_SUCCESS,
+    //   payload: data,
+    // });
+  } catch (error) {
+    console.log(error);
+    // dispatch({
+    //   type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_FAILURE,
+    //   payload: "Unable to update preferences",
+    // });
+  }
+};
+export const updatePassword = async (
+  dispatch: UsersDispatch,
+  updatePasswordPayload: UpdatePasswordType
+) => {
+  try {
+    const auth_token = localStorage.getItem("auth_token");
+    dispatch({ type: UserListAvilableAction.UPDATE_PASSWORD_REQUEST });
+    const passwordPayload = JSON.stringify(updatePasswordPayload);
+    const response = await fetch(`${API_ENDPOINT}/user/password`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${auth_token}`,
+        "Content-Type": "application/json",
+      },
+      body: passwordPayload,
+    });
+    console.log(JSON.stringify(passwordPayload), "from update Password");
+    const data = await response.json();
+    console.log("password", data);
+    if (data.status) {
+      dispatch({
+        type: UserListAvilableAction.UPDATE_PASSWORD_SUCCESS,
+        payload: updatePasswordPayload.new_password,
+      });
+      return { status: data?.status, message: data?.message };
+    }
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_FAILURE,
+      payload: "Unable to update password",
+    });
+  }
+};
+export const updateSportPreferences = async (
+  dispatch: UsersDispatch,
+  favSports: Preference
+) => {
+  try {
+    const auth_token = localStorage.getItem("auth_token");
+    // dispatch({ type: UserListAvilableAction.UPDATE_Sport_PRFERENCES_REQUEST });
+    const preferences = JSON.stringify({ preferences: favSports });
+    const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${auth_token}`,
+        "Content-Type": "application/json",
+      },
+      body: preferences,
+    });
+    console.log(JSON.stringify(favSports), "from front sports");
     const data = await response.json();
     console.log("prefrences", data);
     // dispatch({

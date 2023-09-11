@@ -12,7 +12,7 @@ import Favourite from "../favourites";
 import { useTeamsDispatch } from "../../hooks/teams";
 import { fetchTeams } from "../../contexts/teams/actions";
 import { useUsersDispatch } from "../../hooks/users";
-import { fetchPreferences } from "../../contexts/users/actions";
+import { fetchPreferences, fetchUser } from "../../contexts/users/actions";
 
 export default function Dashboard() {
   const articleDispatch = useArticlesDispatch();
@@ -26,6 +26,7 @@ export default function Dashboard() {
     fetchMatches(matchDispatch);
     fetchTeams(teamDispatch);
     fetchPreferences(usersDispatcch);
+    fetchUser(usersDispatcch);
   }, [
     articleDispatch,
     sportDispatch,

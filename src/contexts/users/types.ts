@@ -17,7 +17,7 @@ export enum UserListAvilableAction {
   FETCH_USERS_REQUESTS = "FETCH_USERS_REQUESTS",
   FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS",
   FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE",
-  FETCH_USER_REQUESTS = "FETCH_USER_REQUESTS",
+  FETCH_USER_REQUEST = "FETCH_USER_REQUEST",
   FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS",
   FETCH_USER_FAILURE = "FETCH_USER_FAILURE",
   CREATE_USER_REQUESTS = "CREATE_USER_REQUESTS",
@@ -36,6 +36,13 @@ export enum UserListAvilableAction {
   UPDATE_TEAM_PRFERENCES_REQUEST = " UPDATE_TEAM_PRFERENCES_REQUEST",
   UPDATE_TEAM_PRFERENCES_SUCCESS = "UPDATE_TEAM_PRFERENCES_SUCCESS",
   UPDATE_TEAM_PRFERENCES_FAILURE = "UPDATE_TEAM_PRFERENCES_FAILURE",
+  SET_SPORT_PREFERENCES = " SET_SPORT_PREFERENCES",
+  UPDATE_SPORT_PRFERENCES_REQUEST = " UPDATE_SPORT_PRFERENCES_REQUEST",
+  UPDATE_SPORT_PRFERENCES_SUCCESS = "UPDATE_SPORT_PRFERENCES_SUCCESS",
+  UPDATE_SPORT_PRFERENCES_FAILURE = "UPDATE_SPORT_PRFERENCES_FAILURE",
+  UPDATE_PASSWORD_REQUEST = "UPDATE_PASSWORD_REQUEST",
+  UPDATE_PASSWORD_SUCCESS = "UPDATE_PASSWORD_SUCCESS",
+  UPDATE_PASSWORD_FAILURE = "UPDATE_PASSWORD_FAILURE",
 }
 
 export type UsersActions =
@@ -43,11 +50,11 @@ export type UsersActions =
       type: UserListAvilableAction.FETCH_USERS_REQUESTS;
     }
   | {
-      type: UserListAvilableAction.FETCH_USERS_SUCCESS;
+      type: UserListAvilableAction.FETCH_USERS_FAILURE;
       payload: User[];
     }
   | { type: UserListAvilableAction.FETCH_USERS_FAILURE; payload: string }
-  | { type: UserListAvilableAction.FETCH_USER_REQUESTS }
+  | { type: UserListAvilableAction.FETCH_USER_REQUEST }
   | { type: UserListAvilableAction.FETCH_USER_SUCCESS; payload: User }
   | { type: UserListAvilableAction.FETCH_USER_FAILURE; payload: string }
   | { type: UserListAvilableAction.CREATE_USER_REQUESTS }
@@ -87,6 +94,32 @@ export type UsersActions =
   | {
       type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_FAILURE;
       payload: string;
+    }
+  | {
+      type: UserListAvilableAction.SET_SPORT_PREFERENCES;
+      payload: string;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_SPORT_PRFERENCES_REQUEST;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_SPORT_PRFERENCES_SUCCESS;
+      payload: Preference;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_SPORT_PRFERENCES_FAILURE;
+      payload: string;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_PASSWORD_REQUEST;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_PASSWORD_SUCCESS;
+      payload: string;
+    }
+  | {
+      type: UserListAvilableAction.UPDATE_PASSWORD_FAILURE;
+      payload: string;
     };
 
 export type Preference = {
@@ -94,6 +127,10 @@ export type Preference = {
   teams: string[];
 };
 
+export type UpdatePasswordType = {
+  current_password: string;
+  new_password: string;
+};
 export type UserLoginPayload = Omit<User, "id" | "preferences" | "name">;
 
 export type UsersDispatch = React.Dispatch<UsersActions>;

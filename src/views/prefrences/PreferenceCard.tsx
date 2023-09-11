@@ -1,11 +1,11 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { useTeamsState } from "../../hooks/teams";
 import { Team } from "../../contexts/teams/types";
-import PrefrenceItem from "./PrefrenceItem";
+import PrefrenceTeamItem from "./PrefrenceTeamItem";
 import { useSportsState } from "../../hooks/sports";
 import { Sport } from "../../contexts/sports/types";
-import { useUsersState } from "../../hooks/users";
+import PrefrenceSportItem from "./PreferenceSportItem";
 
 export default function Prefrence(props: {
   isOpen: boolean;
@@ -14,30 +14,8 @@ export default function Prefrence(props: {
   const { isOpen, closeModal } = props;
   const teamState = useTeamsState();
   const sportState = useSportsState();
-  const userState = useUsersState();
   const { teams } = teamState;
   const { sports } = sportState;
-  const { preferences } = userState;
-  // const usersDispatcch = useUsersDispatch();
-  useEffect(() => {
-    // fetchPreferences(usersDispatcch);
-    // console.log({ sport: preferences?.sports, userState });
-    // if (preferences) {
-    //   // console.log(Object.values(preferences!)[0], "objs");
-    //   Object.keys(preferences).forEach((key) => {
-    //     console.log(`Key: ${key}`);
-    //     if (key === "sports" || key === "teams") {
-    //       const values = preferences[key as keyof Preference];
-    //       // Iterate through array values
-    //       for (const value of values) {
-    //         console.log(`Value: ${value}`);
-    //       }
-    //     }
-    //   });
-    // }
-    // const preferences = getPreferences();
-    console.log(preferences);
-  }, []);
 
   return (
     <>
@@ -67,16 +45,13 @@ export default function Prefrence(props: {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full h-[500px] max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  {/* {isLoading ? (
-                    <>loading</>
-                  ) : ( */}
                   <>
                     <div className="flex justify-between items-center">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg font-medium leading-6 text-gray-900"
+                        className="text-xl font-semibold leading-6 text-gray-900"
                       >
-                        Prefrences
+                        Preferences
                       </Dialog.Title>
                       <button
                         onClick={closeModal}
@@ -99,38 +74,27 @@ export default function Prefrence(props: {
                       </button>
                     </div>
                     <div className="my-2">
-                      <p className="text-lg font-semibold my-1">Teams</p>
+                      <p className="text-lg font-medium my-1">
+                        Favourite Teams
+                      </p>
 
                       <div className="grid grid-cols-4 gap-4">
                         {teams?.map((team: Team, index: number) => (
-                          <PrefrenceItem data={team} key={index} />
+                          <PrefrenceTeamItem data={team} key={index} />
                         ))}
                       </div>
                     </div>
                     <div>
-                      <p className="text-lg font-semibold my-1">Sports</p>
+                      <p className="text-lg font-medium my-1">
+                        Favourite Sports
+                      </p>
                       <div className="grid grid-cols-4 gap-4">
                         {sports?.map((sport: Sport, index: number) => (
-                          <div className="flex " key={index}>
-                            <input
-                              type="checkbox"
-                              name=""
-                              id=""
-                              className="focus:outline-none mr-3"
-                              checked={preferences?.sports?.some(
-                                (item) =>
-                                  item.toLowerCase() ===
-                                  sport?.name.toLowerCase()
-                              )}
-                              onChange={() => {}}
-                            />
-                            <p>{sport?.name}</p>
-                          </div>
+                          <PrefrenceSportItem data={sport} key={index} />
                         ))}
                       </div>
                     </div>
                   </>
-                  {/* )} */}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
