@@ -9,6 +9,7 @@ import {
   UsersDispatch,
 } from "./types";
 
+/* registers user */
 export const createUser = async (dispatch: UsersDispatch, user: User) => {
   dispatch({ type: UserListAvilableAction.CREATE_USER_REQUESTS });
   const { name, email, password } = user;
@@ -51,6 +52,7 @@ export const createUser = async (dispatch: UsersDispatch, user: User) => {
   }
 };
 
+/** sigs in user */
 export const signinUser = async (
   dispatch: UsersDispatch,
   user: UserLoginPayload
@@ -72,7 +74,6 @@ export const signinUser = async (
     }
     const data = await response.json();
     if (data.errors && data.errors.length > 0) {
-      console.error("Failed to create user:", data.errors[0].message);
       return { ok: false, error: data.errors[0].message };
     }
 
@@ -83,12 +84,8 @@ export const signinUser = async (
       payload: data,
     });
     console.log("Sign-in successful", data);
-
-    //redirect user
-
     return { ok: true };
   } catch (error) {
-    console.error("Sign-in failed:", error);
     dispatch({
       type: UserListAvilableAction.SIGNIN_USER_FAILURE,
       payload: "Unable to signin user",
@@ -187,7 +184,7 @@ export const updatePreferences = async (
 };
 
 export const updateTeamPreferences = async (
-  dispatch: UsersDispatch,
+  _dispatch: UsersDispatch,
   favTeams: Preference
 ) => {
   try {
@@ -252,7 +249,7 @@ export const updatePassword = async (
   }
 };
 export const updateSportPreferences = async (
-  dispatch: UsersDispatch,
+  _dispatch: UsersDispatch,
   favSports: Preference
 ) => {
   try {

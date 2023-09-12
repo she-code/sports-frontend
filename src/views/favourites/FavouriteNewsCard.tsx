@@ -29,12 +29,7 @@ export default function FavouriteNewsCard(props: {
       >
         Read more
       </button>
-      {/* <ArticlesDetail
-        isOpen={isOpen}
-        key={articleIdx}
-        closeModal={closeModal}
-        articleProp={article}
-      /> */}
+
       {showModal && (
         <ArticleDetails onClose={closeModal} articleId={article?.id} />
       )}

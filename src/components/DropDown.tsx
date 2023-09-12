@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useUsersState } from "../hooks/users";
 import { Link } from "react-router-dom";
-import Prefrence from "../views/prefrences/PreferenceCard";
+import Preference from "../views/preferences/PreferenceCard";
 
 const Dropdown = () => {
   const [userData] = useState(localStorage.getItem("userData") || "");
@@ -51,7 +51,7 @@ const Dropdown = () => {
                 setIsOpen(!isOpen);
               }}
             >
-              Prefrences
+              Preferences
             </button>
           </li>
 
@@ -74,7 +74,7 @@ const Dropdown = () => {
         </ul>
       </div>
       {isOpen && (
-        <Prefrence isOpen={isOpen} closeModal={() => setIsOpen(false)} />
+        <Preference isOpen={isOpen} closeModal={() => setIsOpen(false)} />
       )}{" "}
     </div>
   );

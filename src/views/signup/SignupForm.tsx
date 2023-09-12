@@ -18,6 +18,8 @@ export default function SignUp() {
   const navigate = useNavigate();
   const userDispatch = useUsersDispatch();
   const [error, setError] = useState("");
+
+  /** calls the createUser action */
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { name, email, password } = data;
     const response = await createUser(userDispatch, { name, email, password });
@@ -31,7 +33,9 @@ export default function SignUp() {
     <div className="items-center lg:w-[700px] mx-auto mt-8   md:w-2/3 sm:w-full">
       <form action="" onSubmit={handleSubmit(onSubmit)}>
         {error && (
-          <span className="text-red-500 capitalize">{error.toString()}</span>
+          <div className="text-white p-2 bg-red-500 rounded mx-3 capitalize w-full text-base mr-5">
+            {error.toString()}
+          </div>
         )}
         <div className="p-3">
           <label htmlFor="name" className="text-xl font-semibold text-white">
@@ -43,7 +47,11 @@ export default function SignUp() {
             placeholder="Full Name"
             {...register("name", { required: true })}
           />
-          {errors.name && <p className="text-red-500">Name is required</p>}
+          {errors.name && (
+            <p className="text-white p-2 bg-red-500 rounded ml-3">
+              Name is required
+            </p>
+          )}
         </div>
         <div className="p-3">
           <label htmlFor="email" className="text-xl font-semibold text-white">
@@ -55,7 +63,11 @@ export default function SignUp() {
             placeholder="user@example.com"
             {...register("email", { required: true })}
           />
-          {errors.email && <p className="text-red-500">Email is required</p>}
+          {errors.email && (
+            <p className="text-white p-2 bg-red-500 rounded ml-3">
+              Email is required
+            </p>
+          )}
         </div>
         <div className="p-3">
           <label
@@ -70,7 +82,9 @@ export default function SignUp() {
             {...register("password", { required: true })}
           />
           {errors.password && (
-            <p className="text-red-500">Password is required</p>
+            <p className="text-white p-2 bg-red-500 rounded ml-3">
+              Password is required
+            </p>
           )}
         </div>
 

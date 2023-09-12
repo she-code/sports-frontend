@@ -2,12 +2,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useTeamsState } from "../../hooks/teams";
 import { Team } from "../../contexts/teams/types";
-import PrefrenceTeamItem from "./PrefrenceTeamItem";
+import PrefrenceTeamItem from "./PreferenceTeamItem";
 import { useSportsState } from "../../hooks/sports";
 import { Sport } from "../../contexts/sports/types";
 import PrefrenceSportItem from "./PreferenceSportItem";
 
-export default function Prefrence(props: {
+export default function Preference(props: {
   isOpen: boolean;
   closeModal: () => void;
 }) {

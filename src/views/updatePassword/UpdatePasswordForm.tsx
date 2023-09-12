@@ -65,7 +65,7 @@ export default function UpdatePasswordForm() {
             htmlFor="new_password"
             className="text-xl font-semibold text-white"
           >
-            Password
+            New Password
           </label>
           <input
             className="border-2 border-gray-200 border-l-blue-500 rounded-lg p-3 m-2 w-full focus:outline-none focus:border-l-green-500 focus:border-l-8"
