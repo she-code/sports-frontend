@@ -39,5 +39,8 @@ The Sports News Application is a web application built using ReactJS that allows
 ![dashboard](https://github.com/she-code/sportPrivate/assets/54357776/eeb1b4e5-759e-40d8-8b7b-d7dbd244b9ab)
 ![sign in](https://github.com/she-code/sportPrivate/assets/54357776/c33846f2-3557-4cef-8652-84eb649700c2)
 ![sign up](https://github.com/she-code/sportPrivate/assets/54357776/ebf89b99-c825-495a-a64d-716afc4044b6)
+![preferences](https://github.com/she-code/wanderWelcomer-backend/assets/54357776/5d0bb246-6ca4-403e-8a13-f7a35eef1e84)
+![update password](https://github.com/she-code/wanderWelcomer-backend/assets/54357776/a7b3c9c2-97d6-4a8a-a5af-dc40c76be3f9)
+
 
 
