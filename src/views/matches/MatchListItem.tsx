@@ -2,33 +2,35 @@ import { useEffect, useState } from "react";
 import { Match } from "../../contexts/matches/types";
 import MatchDetails from "./MatchDetails";
 import { Team } from "../../contexts/teams/types";
-import { fetchMatch } from "../../contexts/matches/actions";
-import { useMatchesDispatch, useMatchesState } from "../../hooks/matches";
+import { getMatchDetails } from "../../contexts/matches/actions";
+import { useMatchesDispatch } from "../../hooks/matches";
 
 export default function MatchListItem(props: { matchProp: Match }) {
-  let { matchProp } = props;
+  const { matchProp } = props;
   const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
   const matchDispatch = useMatchesDispatch();
-
-  const matchState = useMatchesState();
-  const { match } = matchState;
+  const [matchDetail, setMatchDetail] = useState<Match>(matchProp);
   const [reload, setReload] = useState(false);
+
+  async function fetchAndUpdateMatchDetail() {
+    const updatedMatch: Match = await getMatchDetails(matchProp?.id);
+    setMatchDetail(updatedMatch);
+  }
 
   useEffect(() => {
     if (reload) {
-      fetchMatch(matchDispatch, matchProp?.id);
-
+      fetchAndUpdateMatchDetail();
       setReload(false);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      matchProp = match as Match;
     }
-  }, [reload, matchDispatch, matchProp]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reload, matchProp, matchDispatch]);
 
   const refreshMatchDetails = () => {
     setReload(true);
   };
+
   return (
     <div className=" p-4 bg-white rounded-lg shadow-cardShadow m-2 px-5 w-96 border-transparent">
       {reload ? (
@@ -36,7 +38,7 @@ export default function MatchListItem(props: { matchProp: Match }) {
       ) : (
         <>
           <div className="flex justify-between">
-            <p className=" text-xl font-semibold">{matchProp?.sportName}</p>
+            <p className=" text-xl font-semibold">{matchDetail?.sportName}</p>
             <div className="flex ">
               <button
                 className="focus:outline-none px-2 py-1 hover:bg-slate-200 hover:text-green-400 rounded-md"
@@ -83,13 +85,13 @@ export default function MatchListItem(props: { matchProp: Match }) {
               </button>
             </div>
           </div>
-          <p className="text-gray-500 text-base">{matchProp?.location}</p>
+          <p className="text-gray-500 text-base">{matchDetail?.location}</p>
 
           <p className="mt-3 mb-2 text-lg">
-            {matchProp?.name?.toString().split("at")[0]}
+            {matchDetail?.name?.toString().split("at")[0]}
           </p>
           <div className="my-2">
-            {matchProp?.teams.map((team: Team) => (
+            {matchDetail?.teams.map((team: Team) => (
               <div
                 key={team?.id}
                 className="text-center flex justify-between mr-2"
@@ -97,15 +99,15 @@ export default function MatchListItem(props: { matchProp: Match }) {
                 <p className="text-lg font-medium leading-6 text-gray-900 mr-3">
                   {team?.name}
                 </p>
-                <p>{matchProp?.score && matchProp?.score[team?.name]}</p>
+                <p>{matchDetail?.score && matchDetail?.score[team?.name]}</p>
               </div>
             ))}
           </div>
-          {matchProp?.endsAt && (
+          {matchDetail?.endsAt && (
             <p className="text-base">
               <span className="font-semibold ">Ends at: </span>
               <span className="text-slate-500">
-                {new Date(matchProp?.endsAt).toLocaleTimeString([], {
+                {new Date(matchDetail?.endsAt).toLocaleTimeString([], {
                   hour: "2-digit",
                   minute: "2-digit",
                 })}
@@ -116,7 +118,7 @@ export default function MatchListItem(props: { matchProp: Match }) {
             <MatchDetails
               isOpen={isOpen}
               closeModal={closeModal}
-              matchId={matchProp?.id}
+              matchId={matchDetail?.id}
             />
           )}
         </>

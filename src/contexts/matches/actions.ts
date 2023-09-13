@@ -48,7 +48,7 @@ export const fetchMatch = async (
   }
 };
 
-const getMatchDetails = async (id: number): Promise<Match> => {
+export const getMatchDetails = async (id: number): Promise<Match> => {
   const data = await fetch(`${API_ENDPOINT}/matches/${id}`);
   const matchDetails = await data.json();
   return matchDetails;
