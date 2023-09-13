@@ -46,7 +46,7 @@ export default function PrefrenceSportItem(props: { data: Sport }) {
           name={data?.name}
           id={data?.name}
           className="focus:outline-none mr-3"
-          checked={preferences?.sports.some(
+          checked={preferences?.sports?.some(
             (item) => item.toLowerCase() === data?.name.toLowerCase()
           )}
           onChange={() => {

@@ -43,7 +43,7 @@ export default function PrefrenceTeamItem(props: { data: Team | Sport }) {
           name={data?.name}
           id={data?.name}
           className="focus:outline-none mr-3"
-          checked={preferences?.teams.some(
+          checked={preferences?.teams?.some(
             (item) => item.toLowerCase() === data?.name.toLowerCase()
           )}
           onChange={() => {
