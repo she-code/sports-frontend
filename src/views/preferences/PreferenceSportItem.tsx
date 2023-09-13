@@ -47,7 +47,7 @@ export default function PrefrenceSportItem(props: { data: Sport }) {
           id={data?.name}
           className="focus:outline-none mr-3"
           checked={preferences?.sports?.some(
-            (item) => item.toLowerCase() === data?.name.toLowerCase()
+            (item) => item?.toLowerCase() === data?.name.toLowerCase()
           )}
           onChange={() => {
             handleCheckBoxChange(data?.name);

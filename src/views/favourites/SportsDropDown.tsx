@@ -28,8 +28,8 @@ export default function SportDropDown(props: {
       >
         <option value="">Sports</option>
         {sports
-          .filter((sport) =>
-            preferences?.sports
+          ?.filter((sport) =>
+            preferences?.sports?.length
               ? preferences?.sports?.includes(sport.name)
               : true
           )

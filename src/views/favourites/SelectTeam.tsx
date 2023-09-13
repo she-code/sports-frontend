@@ -30,15 +30,16 @@ export default function SelectTeam(props: {
           Teams
         </option>
         {teams
-
-          .filter((team) => {
+          ?.filter((team) => {
             if (selectedSport === "") {
               return true;
             }
             return team.plays == selectedSport;
           })
           .filter((team) =>
-            preferences?.teams ? preferences?.teams?.includes(team.name) : true
+            preferences?.teams?.length
+              ? preferences?.teams?.includes(team?.name)
+              : true
           )
           .map((team, teamIdx) => (
             <option key={teamIdx} value={team.name}>

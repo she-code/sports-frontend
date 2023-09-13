@@ -107,7 +107,7 @@ export default function MatchDetails(props: {
                     </p>
 
                     <div className="flex justify-center items-center  w-3/5 mx-auto">
-                      {match?.teams.map((team, index) => (
+                      {match?.teams?.map((team, index) => (
                         <div
                           key={team?.id}
                           className="w-2/5 text-center flex justify-between"

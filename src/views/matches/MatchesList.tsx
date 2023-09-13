@@ -7,14 +7,16 @@ export default function MatchesList() {
   const userState = useUsersState();
   const { preferences } = userState;
   const { matches, isError } = matchState;
+
   if (isError) return <div>Error...</div>;
+
   return (
     <div className="flex mt-5  min-w-[400px] overflow-x-auto">
       {matches
-        ?.filter((match) => match.isRunning)
+        ?.filter((match) => match?.isRunning)
         .filter((match) =>
-          preferences?.sports
-            ? preferences?.sports?.includes(match.sportName.toLowerCase())
+          preferences?.sports?.length
+            ? preferences?.sports?.includes(match?.sportName)
             : true
         )
         .sort(

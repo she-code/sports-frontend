@@ -47,7 +47,7 @@ export default function SportsTab() {
             {Array.isArray(sports) && sports.length > 0 ? (
               sports
                 .filter((sport) =>
-                  preferences?.sports
+                  preferences?.sports?.length
                     ? preferences?.sports?.includes(sport.name)
                     : true
                 )
@@ -98,7 +98,7 @@ export default function SportsTab() {
             {Array.isArray(sports) && sports.length > 0 ? (
               sports
                 .filter((sport) =>
-                  preferences?.sports
+                  preferences?.sports?.length
                     ? preferences?.sports?.includes(sport.name)
                     : true
                 )

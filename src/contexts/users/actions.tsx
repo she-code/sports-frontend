@@ -159,7 +159,7 @@ export const updateTeamPreferences = async (
   try {
     const auth_token = localStorage.getItem("auth_token");
     const preferences = JSON.stringify({ preferences: favTeams });
-    await fetch(`${API_ENDPOINT}/user/preferences`, {
+    const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${auth_token}`,
@@ -167,6 +167,8 @@ export const updateTeamPreferences = async (
       },
       body: preferences,
     });
+    const data = await response.json();
+    console.log("preferences ", data);
   } catch (error) {
     console.log(error);
   }

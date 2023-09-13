@@ -27,16 +27,16 @@ export default function ArticleListItem(props: { article: Article }) {
       <div className="flex sm:flex-1 flex-col gap-2 p-1 text-base w-4/5">
         <p>{article.sport.name}</p>
         <h1 className="text-lg sm:text-xl font-semibold  text-gray-600">
-          {article.title}
+          {article?.title}
         </h1>
         <div className="w-2/5 overflow-hidden">
           <p className="text-gray-500 text-base sm:text-base whitespace-nowrap truncate">
-            {article.summary}
+            {article?.summary}
           </p>
         </div>
 
         <p className="text-gray-500 text-sm sm:text-base">
-          {new Date(article.date).toDateString().substring(4)}
+          {new Date(article?.date).toDateString().substring(4)}
         </p>
 
         <button

@@ -20,7 +20,7 @@ export default function FavouriteTeamList() {
 
   const filteredArticles = filterArticles(articles, sportFilters, teamFilters);
 
-  const totalArticles = filteredArticles.length;
+  const totalArticles = filteredArticles?.length;
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
   const offset = (currentPage - 1) * articlesPerPage;
 
@@ -35,7 +35,7 @@ export default function FavouriteTeamList() {
       </div>
       <div>
         {filteredArticles
-          .slice(offset, offset + articlesPerPage)
+          ?.slice(offset, offset + articlesPerPage)
           .map((article, articleIdx) => (
             <FavouriteNewsCard
               article={article}

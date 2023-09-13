@@ -8,11 +8,16 @@ export const fetchMatches = async (dispatch: MatchesDispatch) => {
     const response = await fetch(`${API_ENDPOINT}/matches`);
     const data = await response.json();
     const matches: Match[] = Object.values(data)[0] as Match[];
+    const matchDetails = await Promise.all(
+      matches.map((match: Match) => getMatchDetails(match.id))
+    );
+    console.log({ matchDetails });
     dispatch({
       type: MatchListAvilableAction.FETCH_MATCHES_SUCCESS,
-      payload: matches,
+      payload: matchDetails,
     });
   } catch (error) {
+    console.log({ error });
     // Specify 'Error' type for the error
     dispatch({
       type: MatchListAvilableAction.FETCH_MATCHES_FAILURE,
@@ -41,4 +46,10 @@ export const fetchMatch = async (
       payload: "Unable to fetch Match",
     });
   }
+};
+
+const getMatchDetails = async (id: number): Promise<Match> => {
+  const data = await fetch(`${API_ENDPOINT}/matches/${id}`);
+  const matchDetails = await data.json();
+  return matchDetails;
 };

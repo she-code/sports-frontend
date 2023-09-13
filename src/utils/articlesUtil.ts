@@ -5,7 +5,7 @@ export const filterArticles = (
   sportFilters: string,
   teamFilters: string
 ): Article[] => {
-  const filteredArticles: Article[] = articles.filter((article: Article) => {
+  const filteredArticles: Article[] = articles?.filter((article: Article) => {
     // If no teamFilters selected, return all articles
     if (teamFilters === "" && sportFilters === "") {
       return true;

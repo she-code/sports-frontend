@@ -12,20 +12,21 @@ export default function ArticlesList(props: { sportID: number }) {
   const { preferences } = userState;
   const [currentPage, setCurrentPage] = useState(1);
   const articlesPerPage = 5;
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
   //filter the articles based on preferences
   const filteredArticles = articles
-    .filter((article) =>
-      preferences?.sports
-        ? preferences?.sports?.includes(article.sport.name)
+    ?.filter((article) =>
+      preferences?.sports?.length
+        ? preferences?.sports?.includes(article?.sport?.name)
         : true
     )
-    .filter((article) => (sportID > 0 ? article.sport.id === sportID : true));
+    .filter((article) => (sportID > 0 ? article?.sport?.id === sportID : true));
 
-  const totalArticles = filteredArticles.length;
+  const totalArticles = filteredArticles?.length;
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
   const offset = (currentPage - 1) * articlesPerPage;
 
@@ -39,7 +40,7 @@ export default function ArticlesList(props: { sportID: number }) {
   return (
     <div>
       {filteredArticles
-        .sort((a, b) => (a.date > b.date ? -1 : 1))
+        ?.sort((a, b) => (a?.date > b?.date ? -1 : 1))
         .slice(offset, offset + articlesPerPage)
         .map((article) => (
           <ArticleListItem article={article} key={article.id} />
