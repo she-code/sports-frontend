@@ -104,6 +104,3 @@ export default function Preference(props: {
     </>
   );
 }
-
-//fetch teams
-//fetch sports

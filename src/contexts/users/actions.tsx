@@ -32,7 +32,6 @@ export const createUser = async (dispatch: UsersDispatch, user: User) => {
       console.error("Failed to create user:", data.errors[0].message);
       return { ok: false, error: data.errors[0].message };
     }
-    console.log("Sign-up successful");
 
     dispatch({
       type: UserListAvilableAction.CREATE_USER_SUCCESS,
@@ -52,7 +51,7 @@ export const createUser = async (dispatch: UsersDispatch, user: User) => {
   }
 };
 
-/** sigs in user */
+/** sings in user */
 export const signinUser = async (
   dispatch: UsersDispatch,
   user: UserLoginPayload
@@ -83,7 +82,6 @@ export const signinUser = async (
       type: UserListAvilableAction.SIGNIN_USER_SUCCESS,
       payload: data,
     });
-    console.log("Sign-in successful", data);
     return { ok: true };
   } catch (error) {
     dispatch({
@@ -94,6 +92,7 @@ export const signinUser = async (
   }
 };
 
+/** fetches user details */
 export const fetchUser = async (dispatch: UsersDispatch) => {
   try {
     const auth_token = localStorage.getItem("auth_token");
@@ -123,6 +122,8 @@ export const fetchUser = async (dispatch: UsersDispatch) => {
     });
   }
 };
+
+/** gets user's preferences */
 export const fetchPreferences = async (dispatch: UsersDispatch) => {
   try {
     const auth_token = localStorage.getItem("auth_token");
@@ -135,17 +136,14 @@ export const fetchPreferences = async (dispatch: UsersDispatch) => {
     });
     const data = await response.json();
     const preferences = Object.values(data)[0] as Preference;
-    console.log("prefrences", data);
-    console.log(`Bearer ${auth_token}`);
+
     if (preferences) {
       dispatch({
         type: UserListAvilableAction.FETCH_PREFRENCES_SUCCESS,
         payload: preferences,
       });
     }
-    console.log("prefrences", preferences);
   } catch (error) {
-    console.log(error);
     dispatch({
       type: UserListAvilableAction.FETCH_PREFRENCES_FAILURE,
       payload: "Unable to fetch preferences",
@@ -153,45 +151,15 @@ export const fetchPreferences = async (dispatch: UsersDispatch) => {
   }
 };
 
-export const updatePreferences = async (
-  dispatch: UsersDispatch,
-  preferences: Preference
-) => {
-  try {
-    const auth_token = localStorage.getItem("auth_token");
-    dispatch({ type: UserListAvilableAction.UPDATE_PRFERENCES_REQUEST });
-    const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${auth_token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(preferences),
-    });
-    const data = await response.json();
-    console.log("prefrences", data);
-    dispatch({
-      type: UserListAvilableAction.UPDATE_PRFERENCES_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: UserListAvilableAction.UPDATE_PRFERENCES_FAILURE,
-      payload: "Unable to update preferences",
-    });
-  }
-};
-
+/*** updates team preference */
 export const updateTeamPreferences = async (
   _dispatch: UsersDispatch,
   favTeams: Preference
 ) => {
   try {
     const auth_token = localStorage.getItem("auth_token");
-    // dispatch({ type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_REQUEST });
     const preferences = JSON.stringify({ preferences: favTeams });
-    const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+    await fetch(`${API_ENDPOINT}/user/preferences`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${auth_token}`,
@@ -199,21 +167,12 @@ export const updateTeamPreferences = async (
       },
       body: preferences,
     });
-    console.log(JSON.stringify(favTeams), "from front");
-    const data = await response.json();
-    console.log("prefrences", data);
-    // dispatch({
-    //   type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_SUCCESS,
-    //   payload: data,
-    // });
   } catch (error) {
     console.log(error);
-    // dispatch({
-    //   type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_FAILURE,
-    //   payload: "Unable to update preferences",
-    // });
   }
 };
+
+/*** updates user's password */
 export const updatePassword = async (
   dispatch: UsersDispatch,
   updatePasswordPayload: UpdatePasswordType
@@ -230,9 +189,7 @@ export const updatePassword = async (
       },
       body: passwordPayload,
     });
-    console.log(JSON.stringify(passwordPayload), "from update Password");
     const data = await response.json();
-    console.log("password", data);
     if (data.status) {
       dispatch({
         type: UserListAvilableAction.UPDATE_PASSWORD_SUCCESS,
@@ -241,22 +198,22 @@ export const updatePassword = async (
       return { status: data?.status, message: data?.message };
     }
   } catch (error) {
-    console.log(error);
     dispatch({
       type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_FAILURE,
       payload: "Unable to update password",
     });
   }
 };
+
+/*** updates sports preference */
 export const updateSportPreferences = async (
   _dispatch: UsersDispatch,
   favSports: Preference
 ) => {
   try {
     const auth_token = localStorage.getItem("auth_token");
-    // dispatch({ type: UserListAvilableAction.UPDATE_Sport_PRFERENCES_REQUEST });
     const preferences = JSON.stringify({ preferences: favSports });
-    const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+    await fetch(`${API_ENDPOINT}/user/preferences`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${auth_token}`,
@@ -264,18 +221,7 @@ export const updateSportPreferences = async (
       },
       body: preferences,
     });
-    console.log(JSON.stringify(favSports), "from front sports");
-    const data = await response.json();
-    console.log("prefrences", data);
-    // dispatch({
-    //   type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_SUCCESS,
-    //   payload: data,
-    // });
   } catch (error) {
     console.log(error);
-    // dispatch({
-    //   type: UserListAvilableAction.UPDATE_TEAM_PRFERENCES_FAILURE,
-    //   payload: "Unable to update preferences",
-    // });
   }
 };

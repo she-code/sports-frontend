@@ -40,13 +40,6 @@ export default function MatchListItem(props: { matchProp: Match }) {
       </div>
       <p className="text-gray-500 text-base">{matchProp.location}</p>
 
-      {/* {matchProp.teams.map((team) => {
-        return (
-          <p className="mt-3 mb-2 text-lg1" key={team.id}>
-            {team.name}
-          </p>
-        );
-      })} */}
       <p className="mt-3 mb-2 text-lg">
         {matchProp.name.toString().split("at")[0]}
       </p>

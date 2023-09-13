@@ -23,7 +23,6 @@ export default function UpdatePasswordForm() {
       current_password,
       new_password,
     });
-    console.log(response?.status);
     if (response?.status != "error") {
       localStorage.removeItem("auth_token");
       localStorage.removeItem("userData");

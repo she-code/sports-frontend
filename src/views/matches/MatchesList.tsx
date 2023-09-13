@@ -8,7 +8,6 @@ export default function MatchesList() {
   const { preferences } = userState;
   const { matches, isError } = matchState;
   if (isError) return <div>Error...</div>;
-  // if (isLoading) return <div>Loading...</div>;
   return (
     <div className="flex mt-5  min-w-[400px] overflow-x-auto">
       {matches

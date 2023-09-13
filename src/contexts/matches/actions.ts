@@ -29,8 +29,7 @@ export const fetchMatch = async (
   try {
     const response = await fetch(`${API_ENDPOINT}/matches/${matchId}`);
     const data = await response.json();
-    const match: Match = Object.values(data)[0] as Match;
-    console.log({ data, match });
+
     dispatch({
       type: MatchListAvilableAction.FETCH_MATCH_SUCCESS,
       payload: data,

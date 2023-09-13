@@ -25,11 +25,7 @@ export default function PrefrenceTeamItem(props: { data: Team | Sport }) {
   };
   useEffect(() => {
     const updatePreferences = async () => {
-      const updatedPreferences = await updateTeamPreferences(
-        userDispatch,
-        preferences as Preference
-      );
-      console.log({ updatedPreferences }, "from preferences");
+      await updateTeamPreferences(userDispatch, preferences as Preference);
     };
 
     if (handleCheckBoxChangeCalled) {

@@ -14,7 +14,6 @@ export default function ArticleDetails(props: {
 
   useEffect(() => {
     fetchArticle(articleDispatch, Number(articleId));
-    console.log(article, "from single article");
     return () => {
       articleDispatch({ type: ArticleListAvilableAction.CLEAR_ARTICLE });
     };

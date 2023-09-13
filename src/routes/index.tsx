@@ -32,25 +32,5 @@ const router = createBrowserRouter([
     path: "*",
     element: <NotFound />,
   },
-  // {
-  //   path: "/articles/:articleId",
-  //   element: <ArticleDetails />,
-  // },
-  // {
-  //   path: "/",
-  //   element: <AppLayout />,
-  //   children: [
-  //     { index: true, element: <Navigate to="/dashboard" /> },
-  //     { path: "dashboard", element: <Dashboard /> },
-  //     // // {
-  //     // // path: "articles",
-  //     // // element: <ArticlesContainer />,
-  //     // // children: [
-  //     // // { index: true, element: <Navigate to="../" /> },
-  //     // { path: "/articles/:articleId", element: <ArticlesDetail /> },
-  //     // // ],
-  //     // },
-  //   ],
-  // },
 ]);
 export default router;

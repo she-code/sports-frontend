@@ -16,7 +16,6 @@ export default function SelectTeam(props: {
   if (isLoading && teams.length === 0) {
     return <div>Loading...</div>;
   }
-  console.log(preferences?.teams);
   return (
     <div>
       {" "}

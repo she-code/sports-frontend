@@ -15,7 +15,6 @@ export default function SportsTab() {
   const userState = useUsersState();
   const { preferences } = userState;
   const { sports, isLoading, isError, errorMessage } = sportState;
-  console.log({ sporst: sports });
   if (sports.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }

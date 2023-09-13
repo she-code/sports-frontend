@@ -47,20 +47,10 @@ export default function ArticleListItem(props: { article: Article }) {
         >
           Read more
         </button>
-        {/* <Link to={`/articles/${article.id}`} onClick={openModal}>
-          Read more
-        </Link> */}
       </div>
       {showModal && (
         <ArticleDetails onClose={closeModal} articleId={article?.id} />
       )}
-
-      {/* 
-      <ArticlesDetail
-        isOpen={isOpen}
-        closeModal={closeModal}
-        articleProp={article}
-      /> */}
     </div>
   );
 }

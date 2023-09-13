@@ -16,7 +16,6 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
     case UserListAvilableAction.FETCH_USER_REQUEST:
       return { ...state, isLoading: true };
     case UserListAvilableAction.FETCH_USER_SUCCESS: {
-      console.log(action.payload, "payload");
       return { ...state, isLoading: false, user: action.payload };
     }
     case UserListAvilableAction.FETCH_USER_FAILURE:
@@ -59,29 +58,14 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
       return { ...state, isLoading: true };
     }
     case UserListAvilableAction.FETCH_PREFRENCES_SUCCESS: {
-      console.log(action.payload, "payload prefrences");
       return { ...state, isLoading: false, preferences: action.payload };
     }
-    // case UserListAvilableAction.FETCH_PREFRENCES_FAILURE: {
-    //   return {
-    //     ...state,
-    //     isLoading: false,
-    //     isError: true,
-    //     preferences: {
-    //       sports: [],
-    //       teams: [],
-    //     },
-    //     errorMessage: action.payload,
-    //   };
-    // }
-    case UserListAvilableAction.SET_TEAM_PREFERENCES: {
-      console.log("called", action.payload);
 
+    case UserListAvilableAction.SET_TEAM_PREFERENCES: {
       const existingTeams = state?.preferences?.teams || [];
       let updatedTeams = [];
       if (existingTeams.includes(action.payload)) {
         updatedTeams = existingTeams.filter((team) => team !== action.payload);
-        console.log({ updatedTeams }, "filtered");
       } else {
         updatedTeams = [...existingTeams, action.payload];
       }
@@ -97,15 +81,12 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
       };
     }
     case UserListAvilableAction.SET_SPORT_PREFERENCES: {
-      console.log("called", action.payload);
-
       const existingSports = state?.preferences?.sports || [];
       let updatedSports = [];
       if (existingSports.includes(action.payload)) {
         updatedSports = existingSports.filter(
           (sport) => sport !== action.payload
         );
-        console.log({ updatedSports }, "filtered");
       } else {
         updatedSports = [...existingSports, action.payload];
       }

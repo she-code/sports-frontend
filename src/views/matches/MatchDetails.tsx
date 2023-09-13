@@ -15,7 +15,6 @@ export default function MatchDetails(props: {
   const { match, isLoading } = matchState;
   useEffect(() => {
     fetchMatch(matchDispatch, matchId);
-    console.log({ match });
     return () => {
       matchDispatch({ type: MatchListAvilableAction.CLEAR_MATCH });
     };
