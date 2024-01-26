@@ -54,7 +54,7 @@ export const createUser = async (dispatch: UsersDispatch, user: User) => {
 /** sings in user */
 export const signinUser = async (
   dispatch: UsersDispatch,
-  user: UserLoginPayload,
+  user: UserLoginPayload
 ) => {
   const { email, password } = user;
   try {
@@ -68,8 +68,16 @@ export const signinUser = async (
       }),
     });
 
+    /* Feedback: Display a user-friendly message that provides more specific details, 
+   rather than a generic "Sign-in failed" message.*/
     if (!response.ok) {
-      throw new Error("Sign-in failed");
+      if (response.status === 401) {
+        throw new Error("Invalid email or password");
+      } else if (response.status === 403) {
+        throw new Error("Permission denied.");
+      } else {
+        throw new Error(`Unexpected error: ${response.status}`);
+      }
     }
     const data = await response.json();
     if (data.errors && data.errors.length > 0) {
@@ -154,7 +162,7 @@ export const fetchPreferences = async (dispatch: UsersDispatch) => {
 /*** updates team preference */
 export const updateTeamPreferences = async (
   _dispatch: UsersDispatch,
-  favTeams: Preference,
+  favTeams: Preference
 ) => {
   try {
     const auth_token = localStorage.getItem("auth_token");
@@ -177,7 +185,7 @@ export const updateTeamPreferences = async (
 /*** updates user's password */
 export const updatePassword = async (
   dispatch: UsersDispatch,
-  updatePasswordPayload: UpdatePasswordType,
+  updatePasswordPayload: UpdatePasswordType
 ) => {
   try {
     const auth_token = localStorage.getItem("auth_token");
@@ -210,7 +218,7 @@ export const updatePassword = async (
 /*** updates sports preference */
 export const updateSportPreferences = async (
   _dispatch: UsersDispatch,
-  favSports: Preference,
+  favSports: Preference
 ) => {
   try {
     const auth_token = localStorage.getItem("auth_token");

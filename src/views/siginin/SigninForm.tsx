@@ -33,8 +33,8 @@ export default function SignIn() {
     <div className="items-center lg:w-[700px] mx-auto   md:w-2/3 sm:w-full">
       <form action="" onSubmit={handleSubmit(onSubmit)}>
         {error && (
-          <div className="text-white p-2 bg-red-500 rounded mx-3 capitalize w-full text-base">
-            {error.toString()}
+          <div className="text-white p-2 bg-red-500 rounded mx-3 w-full text-base">
+            {error.toString().split("Error:")[1]}
           </div>
         )}
 
