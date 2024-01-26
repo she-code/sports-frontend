@@ -10,7 +10,7 @@ export const initialState: TeamsState = {
 };
 export const teamReducer: Reducer<TeamsState, TeamsActions> = (
   state = initialState,
-  action
+  action,
 ) => {
   switch (action.type) {
     case TeamListAvilableAction.FETCH_TEAMS_REQUESTS:

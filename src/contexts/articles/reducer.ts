@@ -14,7 +14,7 @@ export const initialState: ArticlesState = {
 };
 export const articleReducer: Reducer<ArticlesState, ArticlesActions> = (
   state = initialState,
-  action
+  action,
 ) => {
   switch (action.type) {
     case ArticleListAvilableAction.FETCH_ARTICLES_REQUESTS:

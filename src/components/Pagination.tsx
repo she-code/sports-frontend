@@ -101,8 +101,8 @@ export default function Pagination(props: PaginationProps) {
               {limit > count
                 ? count
                 : count - offset < offset
-                ? count
-                : offset + limit}
+                  ? count
+                  : offset + limit}
             </span>{" "}
             of <span className="font-medium">{count} </span>
             results

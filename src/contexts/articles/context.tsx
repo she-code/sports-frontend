@@ -3,7 +3,7 @@ import { articleReducer, initialState } from "./reducer";
 import { ArticlesState, ArticlesDispatch } from "./types";
 export const ArticlesStateContext = createContext<ArticlesState>(initialState);
 export const ArticlesDispatchContext = createContext<ArticlesDispatch>(
-  () => {}
+  () => {},
 );
 export const ArticlesProvider: React.FC<React.PropsWithChildren> = ({
   children,

@@ -10,7 +10,7 @@ export const initialState: SportsState = {
 };
 export const sportReducer: Reducer<SportsState, SportsActions> = (
   state = initialState,
-  action
+  action,
 ) => {
   switch (action.type) {
     case SportListAvilableAction.FETCH_SPORTS_REQUESTS:

@@ -3,7 +3,7 @@ import { Article } from "../contexts/articles/types";
 export const filterArticles = (
   articles: Article[],
   sportFilters: string,
-  teamFilters: string
+  teamFilters: string,
 ): Article[] => {
   const filteredArticles: Article[] = articles?.filter((article: Article) => {
     // If no teamFilters selected, return all articles

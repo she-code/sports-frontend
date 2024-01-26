@@ -10,7 +10,7 @@ export const initialState: MatchesState = {
 };
 export const matchReducer: Reducer<MatchesState, MatchActions> = (
   state = initialState,
-  action
+  action,
 ) => {
   switch (action.type) {
     case MatchListAvilableAction.FETCH_MATCHES_REQUESTS:

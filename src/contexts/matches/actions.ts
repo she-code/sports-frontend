@@ -9,7 +9,7 @@ export const fetchMatches = async (dispatch: MatchesDispatch) => {
     const data = await response.json();
     const matches: Match[] = Object.values(data)[0] as Match[];
     const matchDetails = await Promise.all(
-      matches.map((match: Match) => getMatchDetails(match.id))
+      matches.map((match: Match) => getMatchDetails(match.id)),
     );
     console.log({ matchDetails });
     dispatch({
@@ -28,7 +28,7 @@ export const fetchMatches = async (dispatch: MatchesDispatch) => {
 
 export const fetchMatch = async (
   dispatch: MatchesDispatch,
-  matchId: number
+  matchId: number,
 ) => {
   dispatch({ type: MatchListAvilableAction.FETCH_MATCH_REQUESTS });
   try {

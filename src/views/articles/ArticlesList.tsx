@@ -22,7 +22,7 @@ export default function ArticlesList(props: { sportID: number }) {
     ?.filter((article) =>
       preferences?.sports?.length
         ? preferences?.sports?.includes(article?.sport?.name)
-        : true
+        : true,
     )
     .filter((article) => (sportID > 0 ? article?.sport?.id === sportID : true));
 

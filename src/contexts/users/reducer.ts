@@ -10,7 +10,7 @@ export const initialState: UsersState = {
 };
 export const userReducer: Reducer<UsersState, UsersActions> = (
   state = initialState,
-  action
+  action,
 ) => {
   switch (action.type) {
     case UserListAvilableAction.FETCH_USER_REQUEST:
@@ -85,7 +85,7 @@ export const userReducer: Reducer<UsersState, UsersActions> = (
       let updatedSports = [];
       if (existingSports.includes(action.payload)) {
         updatedSports = existingSports.filter(
-          (sport) => sport !== action.payload
+          (sport) => sport !== action.payload,
         );
       } else {
         updatedSports = [...existingSports, action.payload];
