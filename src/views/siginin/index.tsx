@@ -14,7 +14,7 @@ export default function Signin() {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-fit shadow-xl rounded-xl py-5 p-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-        <h1 className="text-center text-3xl font-semibold mb-6 mt-3 text-white">
+        <h1 className="text-center text-3xl font-semibold mb-6 mt-4 text-white">
           SIGN IN
         </h1>
         <SigninForm />
