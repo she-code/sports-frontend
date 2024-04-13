@@ -3,6 +3,7 @@ import { Fragment, useEffect } from "react";
 import { useMatchesDispatch, useMatchesState } from "../../hooks/matches";
 import { fetchMatch } from "../../contexts/matches/actions";
 import { MatchListAvilableAction } from "../../contexts/matches/types";
+import { useTranslation } from "react-i18next";
 
 export default function MatchDetails(props: {
   matchId: number;
@@ -13,6 +14,7 @@ export default function MatchDetails(props: {
   const matchDispatch = useMatchesDispatch();
   const matchState = useMatchesState();
   const { match, isLoading } = matchState;
+  const { t } = useTranslation();
   useEffect(() => {
     fetchMatch(matchDispatch, matchId);
     return () => {
@@ -49,7 +51,7 @@ export default function MatchDetails(props: {
             >
               <Dialog.Panel className="w-full h-[900px] max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 {isLoading ? (
-                  <div className="suspense-loading">Loading...</div>
+                  <div className="suspense-loading">{t("loading")}...</div>
                 ) : (
                   <>
                     <div className="flex justify-between items-center">
@@ -103,7 +105,7 @@ export default function MatchDetails(props: {
                       </div>
                     </div>
                     <p className="text-base text-gray-400">
-                      {match?.sportName}
+                      {t(match?.sportName || "")}
                     </p>
 
                     <div className="flex justify-center items-center  w-3/5 mx-auto">
@@ -134,7 +136,9 @@ export default function MatchDetails(props: {
                     <div className="my-3">
                       {match?.startsAt && (
                         <p className="text-base">
-                          <span className="font-semibold ">Started at: </span>
+                          <span className="font-semibold ">
+                            {t("startedAt")}:{" "}
+                          </span>
                           <span className="text-slate-500">
                             {new Date(match.startsAt).toLocaleTimeString([], {
                               hour: "2-digit",
@@ -145,7 +149,9 @@ export default function MatchDetails(props: {
                       )}
                       {match?.endsAt && (
                         <p className="text-base">
-                          <span className="font-semibold ">Ends at: </span>
+                          <span className="font-semibold ">
+                            {t("endsAt")}:{" "}
+                          </span>
                           <span className="text-slate-500">
                             {new Date(match.endsAt).toLocaleTimeString([], {
                               hour: "2-digit",
@@ -155,7 +161,7 @@ export default function MatchDetails(props: {
                         </p>
                       )}
 
-                      <p className="font-medium text-lg mt-3">Summary</p>
+                      <p className="font-medium text-lg mt-3">{t("summary")}</p>
                       <p className=" text-base text-gray-500  text-justify mt-3">
                         {match?.story}
                       </p>

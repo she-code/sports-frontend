@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 type PaginationProps = {
   currentPage: number;
   totalPages: number;
@@ -9,7 +11,7 @@ type PaginationProps = {
 
 export default function Pagination(props: PaginationProps) {
   const { currentPage, totalPages, onPageChange, count, offset, limit } = props;
-
+  const { t } = useTranslation();
   const handlePageClick = (page: number) => {
     onPageChange(page);
   };
@@ -74,7 +76,7 @@ export default function Pagination(props: PaginationProps) {
               }
             }}
           >
-            Previous
+            {t("previous")}
           </button>
         )}
         {currentPage < totalPages && (
@@ -89,23 +91,23 @@ export default function Pagination(props: PaginationProps) {
               }
             }}
           >
-            Next
+            {t("next")}
           </button>
         )}
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div className="bg-glass p-3 rounded-md">
           <p className="text-sm text-black">
-            showing <span className="font-medium">{offset + 1}</span> to{" "}
+            {t("showing")} <span className="font-medium">{offset + 1}</span> to{" "}
             <span className="font-medium">
               {limit > count
                 ? count
                 : count - offset < offset
-                  ? count
-                  : offset + limit}
+                ? count
+                : offset + limit}
             </span>{" "}
-            of <span className="font-medium">{count} </span>
-            results
+            {t("of")} <span className="font-medium">{count} </span>
+            {t("results")}
           </p>
         </div>
         <div>
@@ -141,7 +143,7 @@ export default function Pagination(props: PaginationProps) {
                 className="relative inline-flex items-center mt-2 px-2 py-2 text-gray-400 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none"
                 onClick={() => handlePageClick(currentPage + 1)}
               >
-                <span className="sr-only">Next</span>
+                <span className="sr-only">{t("next")}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

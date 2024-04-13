@@ -2,11 +2,13 @@ import { useState } from "react";
 import Preference from "../views/preferences/PreferenceCard";
 import { Link } from "react-router-dom";
 import { useUsersState } from "../hooks/users";
+import { useTranslation } from "react-i18next";
 
 function Dropdown() {
   const [openModal, setOpenModal] = useState(false);
   const [userData] = useState(localStorage.getItem("userData") || "");
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const userState = useUsersState();
   const { user } = userState;
@@ -60,7 +62,7 @@ function Dropdown() {
                     setOpenModal(!openModal);
                   }}
                 >
-                  Preferences
+                  {t("preferences")}
                 </button>
               </li>
 
@@ -69,7 +71,7 @@ function Dropdown() {
                   to={"/updatePassword"}
                   className="block px-4 py-2  hover:bg-gray-600  text-base hover:text-white"
                 >
-                  Update Password{" "}
+                  {t("updatePassword")}
                 </Link>
               </li>
               <li>
@@ -77,7 +79,7 @@ function Dropdown() {
                   to={"/logout"}
                   className="block px-4 py-2  hover:bg-gray-600  text-base hover:text-white"
                 >
-                  Sign Out
+                  {t("signout")}
                 </Link>
               </li>
             </ul>

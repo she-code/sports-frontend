@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Article } from "../../contexts/articles/types";
 import ArticleDetails from "../articles/ArticleDetails";
-
+import { useTranslation } from "react-i18next";
 export default function FavouriteNewsCard(props: {
   article: Article;
   articleIdx: number;
 }) {
   const { article, articleIdx } = props;
   const [showModal, setShowModal] = useState(false);
-
+  const { t } = useTranslation();
   function closeModal() {
     setShowModal(false);
   }
@@ -27,7 +27,7 @@ export default function FavouriteNewsCard(props: {
         onClick={openModal}
         className="focus:outline-none py-2 px-4 rounded-lg bg-green-500 hover:bg-green-700 text-white font-semibold my-3 mx-auto"
       >
-        Read more
+        {t("readMore")}
       </button>
 
       {showModal && (

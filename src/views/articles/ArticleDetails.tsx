@@ -3,6 +3,7 @@ import { Fragment, useEffect } from "react";
 import { fetchArticle } from "../../contexts/articles/actions";
 import { useArticlesDispatch, useArticlesState } from "../../hooks/articles";
 import { ArticleListAvilableAction } from "../../contexts/articles/types";
+import { useTranslation } from "react-i18next";
 
 export default function ArticleDetails(props: {
   onClose: () => void;
@@ -11,6 +12,7 @@ export default function ArticleDetails(props: {
   const { onClose, articleId } = props;
   const articleDispatch = useArticlesDispatch();
   const { article, isLoading } = useArticlesState();
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchArticle(articleDispatch, Number(articleId));
@@ -47,7 +49,7 @@ export default function ArticleDetails(props: {
             >
               <Dialog.Panel className="w-full h-[800px] max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 {isLoading ? (
-                  <div className="suspense-loading">Loading...</div>
+                  <div className="suspense-loading">{t("loading")}...</div>
                 ) : (
                   <>
                     <div className="flex justify-between items-center">
@@ -86,10 +88,17 @@ export default function ArticleDetails(props: {
                         className="h-full w-full bg-gray-100 bg-center bg-cover"
                       ></div>
                       <p className="mt-3">
-                        Published on:{" "}
-                        {new Date(article?.date as string)
-                          .toDateString()
-                          .substring(4)}
+                        {t("publishedOn")}:
+                        {article?.date
+                          ? new Date(article.date).toLocaleDateString(
+                              undefined,
+                              {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              }
+                            )
+                          : ""}
                       </p>
                       <p className=" text-base text-gray-500 mt-3 text-justify">
                         {article?.content}

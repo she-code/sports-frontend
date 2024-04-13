@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useMatchesState } from "../../hooks/matches";
 import { useUsersState } from "../../hooks/users";
 import MatchListItem from "./MatchListItem";
@@ -7,8 +8,8 @@ export default function MatchesList() {
   const userState = useUsersState();
   const { preferences } = userState;
   const { matches, isError } = matchState;
-
-  if (isError) return <div>Error...</div>;
+  const { t } = useTranslation();
+  if (isError) return <div>{t("error")}...</div>;
 
   return (
     <div className="flex mt-5  min-w-[400px] overflow-x-auto">
@@ -17,10 +18,10 @@ export default function MatchesList() {
         .filter((match) =>
           preferences?.sports?.length
             ? preferences?.sports?.includes(match?.sportName)
-            : true,
+            : true
         )
         .sort(
-          (a, b) => new Date(a.endsAt).getTime() - new Date(b.endsAt).getTime(),
+          (a, b) => new Date(a.endsAt).getTime() - new Date(b.endsAt).getTime()
         )
         .slice(0, 5)
         .map((match) => {

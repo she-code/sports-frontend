@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useSportsState } from "../../hooks/sports";
 import { useUsersState } from "../../hooks/users";
 
@@ -9,12 +10,12 @@ export default function SportDropDown(props: {
   const userState = useUsersState();
   const { preferences } = userState;
   const { isLoading, isError, sports } = sportState;
-
+  const { t } = useTranslation();
   if (isError) {
-    return <div>Error</div>;
+    return <div>{t("error")}</div>;
   }
   if (isLoading && sports.length === 0) {
-    return <div>Loading...</div>;
+    return <div>{t("loading")}...</div>;
   }
   return (
     <div>
@@ -26,16 +27,16 @@ export default function SportDropDown(props: {
         onChange={(e) => setSportFilterCB(e.target.value)}
         defaultValue=""
       >
-        <option value="">Sports</option>
+        <option value="">{t("sports")}</option>
         {sports
           ?.filter((sport) =>
             preferences?.sports?.length
               ? preferences?.sports?.includes(sport.name)
-              : true,
+              : true
           )
           .map((sport, sportIdx) => (
             <option key={sportIdx} value={sport.name}>
-              {sport.name}
+              {t(sport.name)}
             </option>
           ))}
       </select>

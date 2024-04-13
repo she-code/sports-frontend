@@ -6,6 +6,7 @@ import PrefrenceTeamItem from "./PreferenceTeamItem";
 import { useSportsState } from "../../hooks/sports";
 import { Sport } from "../../contexts/sports/types";
 import PrefrenceSportItem from "./PreferenceSportItem";
+import { useTranslation } from "react-i18next";
 
 export default function Preference(props: {
   isOpen: boolean;
@@ -16,7 +17,7 @@ export default function Preference(props: {
   const sportState = useSportsState();
   const { teams } = teamState;
   const { sports } = sportState;
-
+  const { t } = useTranslation();
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -51,7 +52,7 @@ export default function Preference(props: {
                         as="h3"
                         className="text-xl font-semibold leading-6 text-gray-900"
                       >
-                        Preferences
+                        {t("preferences")}
                       </Dialog.Title>
                       <button
                         onClick={closeModal}
@@ -75,7 +76,7 @@ export default function Preference(props: {
                     </div>
                     <div className="my-2">
                       <p className="text-lg font-medium my-1">
-                        Favourite Teams
+                        {t("favourites")} {t("teams")}
                       </p>
 
                       <div className="grid grid-cols-4 gap-4">
@@ -86,7 +87,7 @@ export default function Preference(props: {
                     </div>
                     <div>
                       <p className="text-lg font-medium my-1">
-                        Favourite Sports
+                        {t("favourites")} {t("sports")}
                       </p>
                       <div className="grid grid-cols-4 gap-4">
                         {sports?.map((sport: Sport, index: number) => (

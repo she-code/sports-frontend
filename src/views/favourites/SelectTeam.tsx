@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useTeamsState } from "../../hooks/teams";
 import { useUsersState } from "../../hooks/users";
 
@@ -10,11 +11,12 @@ export default function SelectTeam(props: {
   const userState = useUsersState();
   const { isLoading, isError, teams } = teamState;
   const { preferences } = userState;
+  const { t } = useTranslation();
   if (isError) {
-    return <div>Unable to fetch</div>;
+    return <div>{t("unableToFetch")}</div>;
   }
   if (isLoading && teams.length === 0) {
-    return <div>Loading...</div>;
+    return <div>{t("loading")}...</div>;
   }
   return (
     <div>
@@ -27,7 +29,7 @@ export default function SelectTeam(props: {
         defaultValue=""
       >
         <option value="" className="text-slate-500">
-          Teams
+          {t("teams")}
         </option>
         {teams
           ?.filter((team) => {
@@ -39,7 +41,7 @@ export default function SelectTeam(props: {
           .filter((team) =>
             preferences?.teams?.length
               ? preferences?.teams?.includes(team?.name)
-              : true,
+              : true
           )
           .map((team, teamIdx) => (
             <option key={teamIdx} value={team.name}>

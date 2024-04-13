@@ -3,6 +3,7 @@ import { useUsersDispatch, useUsersState } from "../../hooks/users";
 import { Preference, UserListAvilableAction } from "../../contexts/users/types";
 import { useEffect, useState } from "react";
 import { updateSportPreferences } from "../../contexts/users/actions";
+import { useTranslation } from "react-i18next";
 
 export default function PrefrenceSportItem(props: { data: Sport }) {
   const { data } = props;
@@ -26,7 +27,7 @@ export default function PrefrenceSportItem(props: { data: Sport }) {
     const updatePreferences = async () => {
       const updatedPreferences = await updateSportPreferences(
         userDispatch,
-        preferences as Preference,
+        preferences as Preference
       );
       console.log({ updatedPreferences }, "from preferences");
     };
@@ -37,7 +38,7 @@ export default function PrefrenceSportItem(props: { data: Sport }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleCheckBoxChange]);
-
+  const { t } = useTranslation();
   return (
     <form action="">
       <div className="flex " key={data.id}>
@@ -47,13 +48,13 @@ export default function PrefrenceSportItem(props: { data: Sport }) {
           id={data?.name}
           className="focus:outline-none mr-3"
           checked={preferences?.sports?.some(
-            (item) => item?.toLowerCase() === data?.name.toLowerCase(),
+            (item) => item?.toLowerCase() === data?.name.toLowerCase()
           )}
           onChange={() => {
             handleCheckBoxChange(data?.name);
           }}
         />
-        <label htmlFor={data?.name}>{data?.name}</label>
+        <label htmlFor={data?.name}>{t(data?.name)}</label>
       </div>
     </form>
   );

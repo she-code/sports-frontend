@@ -4,6 +4,7 @@ import { Tab } from "@headlessui/react";
 import { useSportsState } from "../../hooks/sports";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import { useUsersState } from "../../hooks/users";
+import { useTranslation } from "react-i18next";
 const ArticlesList = React.lazy(() => import("../articles/ArticlesList"));
 
 function classNames(...classes: string[]) {
@@ -14,6 +15,7 @@ export default function SportsTab() {
   const sportState = useSportsState();
   const userState = useUsersState();
   const { preferences } = userState;
+  const { t } = useTranslation();
   const { sports, isLoading, isError, errorMessage } = sportState;
   if (sports.length === 0 && isLoading) {
     return <span>Loading...</span>;
@@ -26,7 +28,9 @@ export default function SportsTab() {
   return (
     sports && (
       <div className="w-full  px-2 mr-3 sm:px-0">
-        <h1 className="text-2xl font-semibold text-gray-600">Trending News</h1>
+        <h1 className="text-2xl font-semibold text-gray-600">
+          {t("trendingNews")}
+        </h1>
         <Tab.Group>
           <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20  mt-4">
             <Tab
@@ -36,11 +40,11 @@ export default function SportsTab() {
                   "ring-white ring-opacity-60   focus:outline-none border-transparent",
                   selected
                     ? "bg-green-400  text-white"
-                    : "text-slate-700 hover:bg-white/[0.12] hover:text-white",
+                    : "text-slate-700 hover:bg-white/[0.12] hover:text-white"
                 )
               }
             >
-              All
+              {t("all")}
             </Tab>
 
             {/* Render the tabs */}
@@ -49,7 +53,7 @@ export default function SportsTab() {
                 .filter((sport) =>
                   preferences?.sports?.length
                     ? preferences?.sports?.includes(sport.name)
-                    : true,
+                    : true
                 )
                 .map((sport) => (
                   <Tab
@@ -60,11 +64,11 @@ export default function SportsTab() {
                         "ring-white ring-opacity-60   focus:outline-none border-transparent",
                         selected
                           ? "bg-green-400  text-white"
-                          : "text-slate-700 hover:bg-white/[0.12] hover:text-white",
+                          : "text-slate-700 hover:bg-white/[0.12] hover:text-white"
                       )
                     }
                   >
-                    {sport.name}
+                    {t(sport.name)}
                   </Tab>
                 ))
             ) : (
@@ -76,7 +80,7 @@ export default function SportsTab() {
             <Tab.Panel
               className={classNames(
                 "rounded-xl bg-white p-3",
-                "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
               )}
             >
               <ul>
@@ -84,7 +88,7 @@ export default function SportsTab() {
                   <ErrorBoundary>
                     <Suspense
                       fallback={
-                        <div className="suspense-loading">Loading...</div>
+                        <div className="suspense-loading">{"loading"}...</div>
                       }
                     >
                       <ArticlesList sportID={0} />
@@ -100,14 +104,14 @@ export default function SportsTab() {
                 .filter((sport) =>
                   preferences?.sports?.length
                     ? preferences?.sports?.includes(sport.name)
-                    : true,
+                    : true
                 )
                 .map((sport) => (
                   <Tab.Panel
                     key={sport.id}
                     className={classNames(
                       "rounded-xl bg-white p-3",
-                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
                     )}
                   >
                     <ul>
