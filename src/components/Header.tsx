@@ -14,6 +14,10 @@ export default function Header() {
     i18n.changeLanguage(lang);
   };
 
+  function methodDoesNotExist(): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <>
       <nav className="flex items-center justify-between  p-4 border-transparent bg-white">
@@ -37,6 +41,7 @@ export default function Header() {
               ))}
             </select>
           </div>{" "}
+          <button onClick={() => methodDoesNotExist()}>Break the world</button>
           <div className="flex mr-2 items-center">
             {localStorage.getItem("auth_token") ? (
               <>

@@ -41,7 +41,7 @@ export default function SelectTeam(props: {
           .filter((team) =>
             preferences?.teams?.length
               ? preferences?.teams?.includes(team?.name)
-              : true
+              : true,
           )
           .map((team, teamIdx) => (
             <option key={teamIdx} value={team.name}>

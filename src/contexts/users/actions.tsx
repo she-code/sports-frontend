@@ -28,6 +28,7 @@ export const createUser = async (dispatch: UsersDispatch, user: User) => {
       throw new Error("Sign-up failed");
     }
     const data = await response.json();
+    console.warn({ data });
     if (data.errors && data.errors.length > 0) {
       console.error("Failed to create user:", data.errors[0].message);
       return { ok: false, error: data.errors[0].message };
@@ -54,7 +55,7 @@ export const createUser = async (dispatch: UsersDispatch, user: User) => {
 /** sings in user */
 export const signinUser = async (
   dispatch: UsersDispatch,
-  user: UserLoginPayload,
+  user: UserLoginPayload
 ) => {
   const { email, password } = user;
   try {
@@ -162,7 +163,7 @@ export const fetchPreferences = async (dispatch: UsersDispatch) => {
 /*** updates team preference */
 export const updateTeamPreferences = async (
   _dispatch: UsersDispatch,
-  favTeams: Preference,
+  favTeams: Preference
 ) => {
   try {
     const auth_token = localStorage.getItem("auth_token");
@@ -185,7 +186,7 @@ export const updateTeamPreferences = async (
 /*** updates user's password */
 export const updatePassword = async (
   dispatch: UsersDispatch,
-  updatePasswordPayload: UpdatePasswordType,
+  updatePasswordPayload: UpdatePasswordType
 ) => {
   try {
     const auth_token = localStorage.getItem("auth_token");
@@ -218,7 +219,7 @@ export const updatePassword = async (
 /*** updates sports preference */
 export const updateSportPreferences = async (
   _dispatch: UsersDispatch,
-  favSports: Preference,
+  favSports: Preference
 ) => {
   try {
     const auth_token = localStorage.getItem("auth_token");

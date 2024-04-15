@@ -26,6 +26,7 @@ export default function SignUp() {
     if (response.ok) {
       navigate("/dashboard");
     } else {
+      console.log(response.error, "fre");
       setError(response.error);
     }
   };

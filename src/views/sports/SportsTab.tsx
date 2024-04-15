@@ -40,7 +40,7 @@ export default function SportsTab() {
                   "ring-white ring-opacity-60   focus:outline-none border-transparent",
                   selected
                     ? "bg-green-400  text-white"
-                    : "text-slate-700 hover:bg-white/[0.12] hover:text-white"
+                    : "text-slate-700 hover:bg-white/[0.12] hover:text-white",
                 )
               }
             >
@@ -53,7 +53,7 @@ export default function SportsTab() {
                 .filter((sport) =>
                   preferences?.sports?.length
                     ? preferences?.sports?.includes(sport.name)
-                    : true
+                    : true,
                 )
                 .map((sport) => (
                   <Tab
@@ -64,7 +64,7 @@ export default function SportsTab() {
                         "ring-white ring-opacity-60   focus:outline-none border-transparent",
                         selected
                           ? "bg-green-400  text-white"
-                          : "text-slate-700 hover:bg-white/[0.12] hover:text-white"
+                          : "text-slate-700 hover:bg-white/[0.12] hover:text-white",
                       )
                     }
                   >
@@ -80,7 +80,7 @@ export default function SportsTab() {
             <Tab.Panel
               className={classNames(
                 "rounded-xl bg-white p-3",
-                "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
+                "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
               )}
             >
               <ul>
@@ -104,14 +104,14 @@ export default function SportsTab() {
                 .filter((sport) =>
                   preferences?.sports?.length
                     ? preferences?.sports?.includes(sport.name)
-                    : true
+                    : true,
                 )
                 .map((sport) => (
                   <Tab.Panel
                     key={sport.id}
                     className={classNames(
                       "rounded-xl bg-white p-3",
-                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
+                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                     )}
                   >
                     <ul>

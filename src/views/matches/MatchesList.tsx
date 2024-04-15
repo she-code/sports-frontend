@@ -18,10 +18,10 @@ export default function MatchesList() {
         .filter((match) =>
           preferences?.sports?.length
             ? preferences?.sports?.includes(match?.sportName)
-            : true
+            : true,
         )
         .sort(
-          (a, b) => new Date(a.endsAt).getTime() - new Date(b.endsAt).getTime()
+          (a, b) => new Date(a.endsAt).getTime() - new Date(b.endsAt).getTime(),
         )
         .slice(0, 5)
         .map((match) => {

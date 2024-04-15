@@ -96,7 +96,7 @@ export default function ArticleDetails(props: {
                                 month: "short",
                                 day: "numeric",
                                 year: "numeric",
-                              }
+                              },
                             )
                           : ""}
                       </p>

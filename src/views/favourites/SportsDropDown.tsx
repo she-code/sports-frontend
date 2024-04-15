@@ -32,7 +32,7 @@ export default function SportDropDown(props: {
           ?.filter((sport) =>
             preferences?.sports?.length
               ? preferences?.sports?.includes(sport.name)
-              : true
+              : true,
           )
           .map((sport, sportIdx) => (
             <option key={sportIdx} value={sport.name}>
