@@ -12,13 +12,11 @@ export default function Signup() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className=" w-fit shadow-xl rounded-xl mx-auto py-5  mt-12 p-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-        <h1 className="text-center text-3xl font-semibold mb-6 mt-8 text-white">
-          SIGN UP
-        </h1>
-        <SignupForm />
-      </div>
+    <div className=" w-fit shadow-xl rounded-xl mx-auto py-5  mt-12 p-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+      <h1 className="text-center text-3xl font-semibold mb-6 mt-8 text-white">
+        SIGN UP
+      </h1>
+      <SignupForm />
     </div>
   );
 }
